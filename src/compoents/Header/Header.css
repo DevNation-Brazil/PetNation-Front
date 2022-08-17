@@ -1,0 +1,21 @@
+.headerWrapper{
+    display: flex;
+    justify-content: center;
+    margin: 1em 0 2em 0; 
+}
+
+
+.logo {
+    width: 380px;
+    height: 120px;
+}
+
+
+@media (max-width:900px) {
+
+    .logo {
+        width: 300px;
+        height: 90px;
+        margin-left: 1.6em;
+    }
+}

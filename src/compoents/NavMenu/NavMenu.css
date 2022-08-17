@@ -1,0 +1,105 @@
+.navMenu {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    inset: 0 75% 0 0;
+    background-color: #6E85B7;
+}
+
+.navMenu-mobile {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    inset: 0 95% 0 0;
+    background-color: #6E85B7;
+}
+
+nav .ul-item {
+    display: flex;
+    flex-direction: column;
+    margin-block: .5rem;
+    list-style: none;
+}
+
+nav .ul-item.oicon span {
+    display: none;
+}
+
+
+
+nav .ul-item li {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+    padding-block: 1.2rem;
+    margin-block: .1rem;
+}
+
+nav .ul-item span {
+    border-left: 1px solid ivory;
+    padding-left: 1rem;
+}
+
+nav .ul-item li:hover {
+    background-color: #586d9b;
+}
+
+nav .ul-item li .icon {
+    color: ivory;
+    margin-inline: 1rem;
+    font-size: 30px;
+}
+
+nav .ul-item li a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: ivory;
+    font-family: "Sarala";
+}
+
+
+.menu-icon {
+    margin-inline: 1rem;
+}
+
+.menu-icon .menu {
+    color: ivory;
+    margin-block: 1rem;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+nav .ul-item li:hover {
+    transition: 1s ease;
+}
+
+
+@media (max-width:900px) {
+    
+    .navMenu-mobile {
+        inset: 0 90% 0 0;
+        justify-content: center;
+    }
+
+     /* .navMenu {
+        inset: 0;
+    } */
+
+    nav .ul-item {
+        display: none;  
+    }
+
+    nav .ul-item.oicon {
+        display: flex;
+    }
+
+    .menu-icon {
+        display: none;
+    }
+
+    nav .ul-item li .icon {
+        font-size: clamp(1rem,2vw + 1rem, 4rem);
+    }
+}
