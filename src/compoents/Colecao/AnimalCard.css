@@ -63,9 +63,15 @@
 .cardImage {
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
-    width: 14rem;
+    margin-left: 1rem;
+    width: 10rem;
     height: 11rem;
     object-fit: cover;
+}
+
+.cardImageWrapper {
+    width: 14rem;
+    height: 11rem;
 }
 
 .cardBody {
@@ -112,7 +118,8 @@
     .cardImage {
         border-top-right-radius: 0.5em;
         border-bottom-left-radius: 0;
-        width: 100%;
+        margin-left: 0.6em;
+        width: 90%;
         height: 12rem;
     }
 }

@@ -7,6 +7,7 @@ import { IAnimal } from "../../Interfaces/IAnimal";
 import "./Cadastro.css"
 import { ITipo } from "../../Interfaces/tipo";
 import axios from "axios";
+import { IRaca } from "../../Interfaces/raca";
 
 
 function Cadastro() {
@@ -22,32 +23,43 @@ function Cadastro() {
         setSexoDoAnimal((event.target as HTMLInputElement).value);
     };
 
-    const [nome, setNome] = useState<string>('')
-    const [especie, setEspecie] = useState<string | null>('')
-    const [raca, setRaca] = useState<string | null>('')
-    const [porte, setPorte] = useState<string | null>('')
-    const [idade, setIdade] = useState<string>('')
-    const [imagem, setImagem] = useState<File | null> (null)
+    const [nome, setNome] = useState<string |null>('')
+    const [tipo, setTipo] = useState<any | null>('')
+    const [raca, setRaca] = useState<any | null>('')
+    const [porte, setPorte] = useState<string| null>('')
+    const [idade, setIdade] = useState<string| null>('')
+
+    const [imagem, setImagem] = useState<File | null>(null)
 
 
-    const [tipos, setTipos] = useState<ITipo>()
-    const [racas, setRacas] = useState([''])
-    const [portes, setPortes] = useState([''])
+    const [tipos, setTipos] = useState<ITipo[]>([])
+    const [racas, setRacas] = useState<IRaca[]>([])
+    const [portes, setPortes] = useState<string[]>([])
 
     console.log(tipos)
     console.log(racas)
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/tipo`)
+        axios.get<ITipo[]>(`http://localhost:8080/api/v1/tipo`)
             .then(resposta => setTipos(resposta.data))
 
-        axios.get(`http://localhost:8080/api/v1/raca`)
+        axios.get<IRaca[]>(`http://localhost:8080/api/v1/raca`)
             .then(resposta => setRacas(resposta.data))
 
-        
-        
+
+
         setPortes(["Pequeno", "Médio", "Grande"])
 
     }, [])
+
+   const tiposAutoComplete:string[] = tipos.map(tiposMapped => {
+        return tiposMapped.nome
+    })
+
+    const racasAutoComplete:string[] = racas.map(racasMapped => {
+        return racasMapped.nome
+    })
+
 
 
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +97,7 @@ function Cadastro() {
         console.log({
             sexo: sexoDoAnimal,
             nome: nome,
-            especie: especie,
+            tipo: tipo,
             raca: raca,
             porte: porte,
             idade: idade
@@ -153,27 +165,28 @@ function Cadastro() {
 
 
 
-           {/* <Autocomplete
-                onChange={(event, value) => setTipos(value)}
-                disablePortal
-                id="especieAutoComplete"
-               options={tipos?.nome}
-                sx={{ width: 300, marginTop: 1 }}
-                renderInput={(params) => <TextField
-                    {...params}
+                <Autocomplete
+                    onChange={(event, value) => setTipo(value)}
+                    disablePortal
+                    id="tiposAutoComplete"
+                    options={tiposAutoComplete}
+                    sx={{ width: 300, marginTop: 1 }}
+                    renderInput={(params) => <TextField
+                        {...params}
 
-                    id="especieField"
-                    label="Espécie"
-                    variant="standard"
-                    required />}
-            /> */}
+                        id="especieField"
+                        label="Tipos"
+                        variant="standard"
+                        required />}
+                />
+
 
 
             <Autocomplete
                 onChange={(event, value) => setRaca(value)}
                 disablePortal
                 id="racaAutoComplete"
-                options={racas}
+                options={racasAutoComplete}
                 sx={{ width: 300, marginTop: 1 }}
                 renderInput={(params) => <TextField
 
@@ -183,6 +196,8 @@ function Cadastro() {
                     variant="standard"
                     required />}
             />
+
+          
 
             <Autocomplete
                 onChange={(event, value) => setPorte(value)}
@@ -213,37 +228,39 @@ function Cadastro() {
 
             <button className="botaoEnviar" type="submit" >
                 Enviar  <div className="iconeDoBotao"><AiOutlineSend size={20} /></div></button>
-                
-            
-                {
-                    !active ? 
-                        <Alert sx={{
-                            width: {
-                                xs: 280,
-                                sm: 320,
-                                md: 350,
-                                lg: 500,
-                                xl: 600,
-                            },
-                            marginTop: 2,
-                            display: 'none'}}
-                            severity="success"
-                            className='alert'>Pet cadastrado com sucesso!
-                        </Alert> : 
-                        <Alert sx={{
-                            width: {
-                                xs: 280,
-                                sm: 320,
-                                md: 350,
-                                lg: 500,
-                                xl: 600,
-                            },
-                            marginTop: 2,}}>Pet cadastrado com sucesso!
-                            </Alert>
-                }
+
+
+            {
+                !active ?
+                    <Alert sx={{
+                        width: {
+                            xs: 280,
+                            sm: 320,
+                            md: 350,
+                            lg: 500,
+                            xl: 600,
+                        },
+                        marginTop: 2,
+                        display: 'none'
+                    }}
+                        severity="success"
+                        className='alert'>Pet cadastrado com sucesso!
+                    </Alert> :
+                    <Alert sx={{
+                        width: {
+                            xs: 280,
+                            sm: 320,
+                            md: 350,
+                            lg: 500,
+                            xl: 600,
+                        },
+                        marginTop: 2,
+                    }}>Pet cadastrado com sucesso!
+                    </Alert>
+            }
         </Box>
 
-        
+
     );
 }
 
