@@ -27,7 +27,7 @@ function AnimalCards() {
 
 
                 {pets.map(petsMapped =>
-                    <div className="cardWrapper backCard">
+                    <div className="cardWrapper backCard" key={petsMapped.id}>
                         <div className="cardd">
                             <div className="cardImageWrapper">
                             <img className="cardImage" src={doguito} />
@@ -38,7 +38,7 @@ function AnimalCards() {
                                 <p className="cardText" key={petsMapped.tipo.nome}>Tipo: {petsMapped.tipo.nome}</p>
                                 <p className="cardText" key={petsMapped.raca.nome}>Raça: {petsMapped.raca.nome}</p>
                                 <p className="cardText" key={petsMapped.porte}>Tamanho: {petsMapped.porte}</p>
-                                <p className="cardText" key={petsMapped.idade}>Idade: {petsMapped.idade}</p>
+                                <p className="cardText" key={petsMapped.idade}>Idade: {petsMapped.idade} anos</p>
 
                             </div>
                         </div>

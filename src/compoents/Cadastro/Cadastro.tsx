@@ -11,33 +11,31 @@ import { IRaca } from "../../Interfaces/raca";
 
 
 function Cadastro() {
+
+    // referente ao alert de confirmação de cadastro
     const [active, setActive] = useState(false)
-    console.log(active)
 
-
-
-    const [sexoDoAnimal, setSexoDoAnimal] = useState('');
 
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSexoDoAnimal((event.target as HTMLInputElement).value);
     };
 
-    const [nome, setNome] = useState<string |null>('')
+    const [sexoDoAnimal, setSexoDoAnimal] = useState<string>('');
+    const [nome, setNome] = useState<string>('')
     const [tipo, setTipo] = useState<any | null>('')
     const [raca, setRaca] = useState<any | null>('')
-    const [porte, setPorte] = useState<string| null>('')
-    const [idade, setIdade] = useState<string| null>('')
-
-    const [imagem, setImagem] = useState<File | null>(null)
+    const [porte, setPorte] = useState<any | null>('')
+    const [idade, setIdade] = useState<string>('')
 
 
     const [tipos, setTipos] = useState<ITipo[]>([])
     const [racas, setRacas] = useState<IRaca[]>([])
     const [portes, setPortes] = useState<string[]>([])
 
-    console.log(tipos)
-    console.log(racas)
+
+
+    //Get auto complete de tipo e raca
 
     useEffect(() => {
         axios.get<ITipo[]>(`http://localhost:8080/api/v1/tipo`)
@@ -52,6 +50,8 @@ function Cadastro() {
 
     }, [])
 
+
+    // Map para o autocomplete de tipo e raca
    const tiposAutoComplete:string[] = tipos.map(tiposMapped => {
         return tiposMapped.nome
     })
@@ -61,6 +61,11 @@ function Cadastro() {
     })
 
 
+
+    // Imagem. Ver...
+    const [imagem, setImagem] = useState<string | null | File>(doguito)
+
+    
 
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
@@ -74,6 +79,17 @@ function Cadastro() {
 
     function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault()
+
+        const formData = new FormData();
+
+        formData.append('sexo', sexoDoAnimal)
+        formData.append('nome', nome)
+        formData.append('tipo', tipo)
+        formData.append('raca', raca)
+        formData.append('porte', porte)
+        formData.append('idade', idade)
+
+
         /* tem que usar o useParams do react-router-dom 
         if (parametros.id) {
 
@@ -84,32 +100,36 @@ function Cadastro() {
                     alert("Restaurante atualizado com sucesso!")
                 })
 
-        } else {
+        } else {}
+       */
 
-            axios.post('http://localhost:8000/api/v2/restaurantes/', {
-                nome: nomeRestaurante
-            })
-                .then(() => {
-                    setNomeRestaurante('')
-                    alert("Restaurante cadastrado com sucesso!")
-                })
-        */
-        console.log({
-            sexo: sexoDoAnimal,
-            nome: nome,
-            tipo: tipo,
-            raca: raca,
-            porte: porte,
-            idade: idade
+        axios.post('http://localhost:8080/api/v1/pet', {
+                sexo: sexoDoAnimal,
+                nome: nome,
+                tipo: {
+                    nome: tipo
+                },
+                raca: {
+                    nome: raca
+                },
+                porte: porte,
+                idade: idade,
         })
+            .then(() => {
+                setNome('')
+                setTipos([])
+                setRacas([])
+                setPortes([])
+                setIdade('')
+                })
+            
+        
 
         setActive(true)
         setTimeout(() => setActive(false), 5000)
 
-
-
-
     }
+
 
     return (
         <Box component="form" onSubmit={aoEnviar} className="cadastroWrapper" sx={{ height: 700 }}>
@@ -230,7 +250,10 @@ function Cadastro() {
                 Enviar  <div className="iconeDoBotao"><AiOutlineSend size={20} /></div></button>
 
 
+            
+
             {
+                /* Confirmação de cadastro */
                 !active ?
                     <Alert sx={{
                         width: {
