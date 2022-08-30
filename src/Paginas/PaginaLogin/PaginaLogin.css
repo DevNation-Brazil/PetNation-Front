@@ -1,0 +1,14 @@
+.changingArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media (max-width:900px) {
+    .changingArea {
+        margin-left: 2em;
+    }
+}

@@ -1,0 +1,64 @@
+.newcomersWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5em;
+}
+
+.newcomersMain {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.cardTextao {
+    border-radius: 0.5em;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F7F9FB;
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+    width: 45em;
+    margin-right: 4em;
+}
+
+
+
+.titleTextao {
+    font-weight: 700;
+    margin-top: 1em;
+    text-align: center;
+    color: #10162f;
+    font-size: 1.5rem;
+}
+
+.textoTextao {
+    padding: 1em;
+    color: #10162f;
+    font-size: 1rem;
+    text-align: justify;
+    text-indent: 1.4em;
+
+}
+
+
+@media (max-width:900px) {
+
+    .newcomersMain {
+        margin-left: 2em;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2em;
+    }
+
+    .cardTextao {
+        width: 17em;
+        margin-right: 0;
+        margin-bottom: 2em;
+    }
+}

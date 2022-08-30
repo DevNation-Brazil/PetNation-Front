@@ -8,7 +8,7 @@ import vag from "../../assets/vag.jpg"
 function Contato() {
     return (
         <div>
-            <h2 className="titleContato"> ... </h2>
+            <h2 className="titleContato"> Realizadores </h2>
         <div className="contatoWrapper">
             <Card sx={{ width: {xs: 300,
                                 sm: 320,
@@ -32,11 +32,11 @@ function Contato() {
                             <div className="contactIcon">
                                 <AiFillGithub />
                             </div> Github </a></Typography>
-                    <p className="mailP">
+                    <span className="mailP">
                         <div className="contactIcon">
                             <AiFillMail />
                         </div> E-mail: gustavo.rutiquewiski@outlook.com
-                    </p>
+                    </span>
                 </CardContent>
                 
                 
@@ -66,10 +66,10 @@ function Contato() {
                                 <AiFillGithub className="gitIcon"/>
                             </div> Github </a></Typography>
 
-                    <p className="mailP">
+                    <span className="mailP">
                         <div className="contactIcon">
                             <AiFillMail />
-                        </div> E-mail: vagnerrosnoski@gmail.com</p>
+                        </div> E-mail: vagnerrosnoski@gmail.com</span>
 
                 </CardContent>
                 

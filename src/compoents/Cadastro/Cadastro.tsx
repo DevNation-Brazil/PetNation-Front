@@ -1,13 +1,13 @@
-import { Avatar, TextField, Autocomplete, Typography, FormControl, RadioGroup, FormControlLabel, Radio, Button, Alert } from "@mui/material";
+import { Avatar, TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Button, Alert } from "@mui/material";
 import { Box } from "@mui/system";
 import { AiOutlineSend } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import doguito from "../../assets/doguito.svg"
-import { IAnimal } from "../../Interfaces/IAnimal";
 import "./Cadastro.css"
 import { ITipo } from "../../Interfaces/tipo";
 import axios from "axios";
 import { IRaca } from "../../Interfaces/raca";
+import TituloPadras from "../TituloPadras/TituloPadras";
 
 
 function Cadastro() {
@@ -136,7 +136,7 @@ function Cadastro() {
 
 
 
-            <h2 className="titleCadastre" >Cadastre seu Pet</h2>
+            <TituloPadras texto="Cadastre seu Pet" />
 
             <Avatar alt="Imagem Place Holder"
                 src={doguito}

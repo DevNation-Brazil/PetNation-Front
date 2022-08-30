@@ -49,9 +49,11 @@ table {
 
 /* #e3f5fc ou #C4D7E0 
 	bege #EDEAE5 
-	whito F7F9FB*/
+	whito F7F9FB
+	dark blue #051933*/
 body {
 	background: linear-gradient(90deg, #e3f5fc 0%, #C4D7E0 35%, #e3f5fc 100%);
+	font-family: 'Roboto', sans-serif;
 }
 
 a {

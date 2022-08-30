@@ -3,6 +3,7 @@ import doguito from "../../assets/doguito.svg"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IAnimal } from "../../Interfaces/IAnimal";
+import TituloPadras from "../TituloPadras/TituloPadras";
 
 
 
@@ -21,7 +22,8 @@ function AnimalCards() {
 
     return (
         <div className="colecaoWrapper">
-            <h2 className="titlePetCadastrados">Pets Cadastrados</h2>
+            
+            <TituloPadras texto="Pets Cadastrados" />
 
             <div className="AnimalCardWrapper">
 

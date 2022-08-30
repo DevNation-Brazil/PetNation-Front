@@ -6,7 +6,7 @@ const logo = require('../../assets/logoPetNation.png')
 function Header() {
     return (
         <div className="headerWrapper">
-            <img className="logo" src={logo} />
+            <img className="logo" src={logo} alt="Logo PetNation"/>
         </div>
     );
 }

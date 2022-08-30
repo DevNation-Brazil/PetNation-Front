@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { IoMdClose, IoMdMenu} from 'react-icons/io'
-import { AiOutlineForm, AiOutlineHome } from "react-icons/ai";
-import { GoMail } from "react-icons/go";
+import { IoMdClose, IoMdMenu } from 'react-icons/io'
+import { IoImagesOutline } from "react-icons/io5";
+import { AiOutlineForm, AiOutlineHome, AiOutlineUser } from "react-icons/ai";
 import { Link } from 'react-router-dom'
 import './NavMenu.css'
 
@@ -28,10 +28,26 @@ const NavMenu = () => {
 
                     <li>
                         
-                        <Link to='/'><AiOutlineHome className='icon' />
+                        <Link to='/home'><AiOutlineHome className='icon' />
                        <span>Início</span>
                        </Link>
                     </li>
+
+                    <li>
+                        
+                        <Link to='/login'><AiOutlineUser className='icon' />
+                        <span>Login</span>
+                       </Link>
+                    </li>
+
+
+                    <li>
+                        
+                        <Link to='/colecao'><IoImagesOutline className='icon' />
+                        <span>Coleção</span>
+                       </Link>
+                    </li>
+
 
 
                     <li>
@@ -43,12 +59,7 @@ const NavMenu = () => {
 
 
 
-                    <li>
-                        
-                        <Link to='/contato'><GoMail className='icon' />
-                        <span>Contato</span>
-                       </Link>
-                    </li>
+                    
 
 
                 </ul>

@@ -1,0 +1,30 @@
+.landingHeader {
+    display: flex;
+    justify-content: space-between;
+    background-color: #7982ac;
+}
+
+.logoLanging {
+    width: 380px;
+    height: 120px;
+    margin-top: 0.5em;
+}
+
+.listaLandingHeader {
+    display: flex;
+    gap: 4em;
+    margin-top: 3.5em;
+    margin-right: 4em;
+}
+
+.itemListaLandingHeader {
+    color: #10162f;
+    font-size: 1.5em;
+}
+
+.iconeListaLandingHeader {
+    margin-right: 0.3em;
+    width: 1em;
+    height: 1em;
+}
+

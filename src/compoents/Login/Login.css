@@ -1,0 +1,83 @@
+.loginWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #F7F9FB;
+    border-radius: 0.5em;
+    height: 300px;
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loginBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginTitle {
+    color: #10162f;
+    font-size: 1.4rem;
+    margin-bottom: 1.4rem;
+    margin-top: 1rem;
+}
+
+
+.botaoEntrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    margin-top: 1em;
+    background-color: #6E85B7;
+    width: 400px;
+    height: 40px;
+    border: none;
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    color: ivory;
+    transition-duration: 1s;
+}
+
+.botaoEntrar:hover{
+    background-color: #8197c9;
+}
+
+
+.novoPorAqui {
+    margin-top: 1em;
+    color: #636363;
+}
+
+.novoPorAqui a {
+    margin-left: 0.2em;
+    text-decoration: none;
+    color: #10162f;
+    font-weight: 500;
+}
+
+.novoPorAqui a:hover {
+    text-decoration: underline;
+    color: #be3ead;
+}
+
+
+@media (max-width:900px) {
+
+    .loginWrapper {
+        width: 300px;
+    }
+
+    .loginTitle {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .botaoEntrar {
+        width: 250px;
+    }
+
+}

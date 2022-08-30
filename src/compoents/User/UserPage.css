@@ -1,0 +1,32 @@
+.userPageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.botaoSairWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+
+.botaoSair {
+    margin-top: 2em;
+    background-color: #6E85B7;
+    width: 105px;
+    height: 50px;
+    border: none;
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+    color: ivory;
+    transition-duration: 1s;
+}
+
+.botaoSair:hover{
+    background-color: #8197c9;
+}
