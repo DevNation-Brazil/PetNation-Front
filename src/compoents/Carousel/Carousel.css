@@ -1,0 +1,26 @@
+.carouselWrapper {
+    width: 50%;
+    margin: 1em;
+   
+}
+
+
+.carouselImage {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width:900px) {
+
+    .carouselWrapper {
+        width: 90%;
+        margin: 1em 0 0 0;
+    }
+
+    .carouselImage {
+        height: 400px;
+        
+    }
+}

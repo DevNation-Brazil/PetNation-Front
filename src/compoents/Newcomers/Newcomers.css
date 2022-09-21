@@ -19,7 +19,6 @@
     border-radius: 0.5em;
     font-family: 'Roboto', sans-serif;
     background-color: #F7F9FB;
-    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
     width: 45em;
     margin-right: 4em;
 }
@@ -47,7 +46,6 @@
 @media (max-width:900px) {
 
     .newcomersMain {
-        margin-left: 2em;
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;

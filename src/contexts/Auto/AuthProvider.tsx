@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element } ) => {
     const [user, setUser] = useState<IUser | null>(null)
     const api = useApi();
 
-    useEffect(() => {
+   /* useEffect(() => {
         const validateToken = async () => {
             const storageData = localStorage.getItem('authToken');
             if(storageData) {
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element } ) => {
             }
         }
         validateToken();
-    }, [])
+    }, []) */
 
     const signin = async (email: string, password: string) => {
         const data = await api.signin(email, password)

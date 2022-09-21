@@ -1,13 +1,12 @@
 import Header from "../../compoents/Header/Header"
-import Login from "../../compoents/Login/Login"
 import NavMenu from "../../compoents/NavMenu/NavMenu"
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
 import UserPage from "../../compoents/User/UserPage";
-import "./PaginaLogin.css"
+import CriarConta from "../../compoents/Login/CriarConta";
 
 
-export const PaginaLogin = () => {
+export const PaginaCriarConta = () => {
     const auth = useContext(AuthContext);
 
     return (
@@ -18,7 +17,7 @@ export const PaginaLogin = () => {
 
             <div className="changingArea">
                 
-                {auth.user ? <UserPage /> : <Login />}
+                {auth.user ? <UserPage /> : <CriarConta />}
             </div>
         </div>
     )

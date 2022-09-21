@@ -1,0 +1,66 @@
+.menu-container {
+    font-family: 'Roboto', sans-serif;
+    color: ivory;
+}
+
+.menu-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.userMenu.active{
+    display: block;
+    z-index: 9;
+}
+
+.userMenu {
+    display: none;
+    position: relative;
+}
+
+.user-buton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    position: absolute;
+    margin-top: 0.4em;
+    border-radius: 10px;
+    width: 15em;
+    right: 0;
+    left: auto;
+    background-color: #6E85B7;
+}
+
+.user-buton li {
+    display: block;
+}
+
+.user-buton-item a{
+    color: ivory;
+}
+
+.userMenuButton {
+    background-color: #6E85B7;
+    width: 170px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 1em;
+    color: ivory;
+    transition-duration: 1s;
+}
+
+.userMenuButtonDown {
+    margin-bottom: 1em;
+}
+
+.userMenuButton:hover{
+    background-color: #8197c9;
+}
+
+.userMenuButton a:hover{
+    color: ivory;
+}

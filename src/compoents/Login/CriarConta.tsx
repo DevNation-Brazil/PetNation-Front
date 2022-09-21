@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
 import "./LoginCriarConta.css"
 
-function Login() {
+
+function CriarConta() {
     const auth = useContext(AuthContext)
     const navigate = useNavigate();
 
+    const [nome, setNome] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
@@ -20,12 +22,11 @@ function Login() {
         setPassword(event.target.value);
     }
     
-    const handleLogin = async (evento: React.FormEvent<HTMLFormElement>) => {
-        evento.preventDefault()
+    const handleLogin = async () => {
         if(email && password) {
             const isLogged = await auth.signin(email, password);
             if(isLogged) {
-               console.log("gg")
+               
             } else {
                 alert("E-mail ou senha incorretos.")
             }
@@ -37,7 +38,7 @@ function Login() {
 
 
     return (
-        <div className="loginWrapper">
+        <div className="criarContaWrapper">
 
             <Box component="form" className="loginBox" onSubmit={handleLogin} sx={{ width: {xs: 300,
                                                                     sm: 300,
@@ -45,7 +46,23 @@ function Login() {
                                                                     lg: 480,
                                                                     xl: 500,} }}>
 
-                <h3 className="loginTitle">Faça o login para cadastrar seu pet.</h3>
+                <h3 className="loginTitle">Crie sua para cadastrar seu pet.</h3>
+
+
+                <TextField
+                    onChange={(event) => {
+                        setNome(event.target.value);
+                    }}
+                    value={nome}
+                    id="nome"
+                    label="Digite seu nome"
+                    variant="standard"
+                    required
+                    sx={{ width: {xs: 250,
+                                 sm: 270,
+                                 md: 320,
+                                 lg: 380,
+                                 xl: 400,}, marginTop: 1 }} />
 
                 <TextField
                     onChange={handleEmailInput}
@@ -58,7 +75,7 @@ function Login() {
                                  sm: 270,
                                  md: 320,
                                  lg: 380,
-                                 xl: 400,}, marginTop: 1 }} />
+                                 xl: 400,}, marginTop: 3 }} />
 
                 <TextField
                     onChange={handlePasswordInput}
@@ -81,9 +98,9 @@ function Login() {
                         type="submit" >
                     Entrar</button>
 
-                <span className="novoPorAqui">Novo por aqui? 
-                    <Link to='/criarconta'>
-                        Crie sua conta.
+                <span className="novoPorAqui">
+                    <Link to='/login'>
+                        Faça login.
                     </Link>
                 </span>
 
@@ -92,4 +109,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default CriarConta;

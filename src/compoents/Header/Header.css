@@ -1,21 +1,82 @@
 .headerWrapper{
     display: flex;
-    justify-content: center;
-    margin: 1em 0 2em 0; 
+    justify-content: space-between;
+    margin: 1em 2em 2em 6em; 
+    position: relative;
 }
 
 
 .logo {
-    width: 380px;
-    height: 120px;
+    margin-left: 2.5em;
+    width: 350px;
+    height: 110px;
+}
+
+
+.loginHeader {
+    font-family: 'Roboto', sans-serif;
+    background-color: #6E85B7;
+    border: none;
+    height: 50px;
+    margin-top: 1.5em;
+    font-weight: 500;
+    font-size: 20px;
+    color: ivory;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.loginHeader:hover {
+    background-color: #2d313a;
+    text-decoration: underline;
+}
+
+.loginHeader a{
+    margin: 0 0.5em 0 0.5em;
+    color: ivory;
+    gap: 5px;
+    display: flex;
+    text-decoration: none;
+}
+
+.loginHeader a:hover{
+    color: ivory;
+}
+
+.loginHeaderAvatar {
+    margin-top: 1.5em;
 }
 
 
 @media (max-width:900px) {
+    
+
+    .headerWrapper{
+        margin: 1em 1em 3em 1em; 
+        justify-content: space-between;
+    }
+
+    .divTroll {
+        display: none;
+    }
 
     .logo {
-        width: 300px;
-        height: 90px;
+        width: 150px;
+        height: 45px;
         margin-left: 1.6em;
+    }
+
+    .loginHeader {
+        margin-top: 0;
+        font-size: 18px;
+        height: 40px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .loginHeaderAvatar {
+        margin-top: 0;
     }
 }

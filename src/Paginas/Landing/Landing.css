@@ -1,0 +1,60 @@
+.landingMainContentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.landingMainContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+    width: 95%;
+}
+
+.carouselCard {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    /*background-color: #F7F9FB;*/
+    margin-left: 2em;
+    margin-right: 2em;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.textoCarouselCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ;
+}
+
+.landingContentSecundario {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10em;
+}
+
+@media (max-width:900px) {
+    .landingContentSecundario {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 2em;
+        gap: 2em;
+    }
+
+    .landingMainContent {
+        width: 90%;
+    }
+
+
+    .carouselCard {
+        align-items: center;
+        flex-direction: column;
+        margin: 10px;
+    }
+}

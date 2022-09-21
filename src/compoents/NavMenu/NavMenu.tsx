@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IoMdClose, IoMdMenu } from 'react-icons/io'
 import { IoImagesOutline } from "react-icons/io5";
-import { AiOutlineForm, AiOutlineHome, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineForm, AiOutlineHome, AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { Link } from 'react-router-dom'
 import './NavMenu.css'
 
@@ -28,7 +28,7 @@ const NavMenu = () => {
 
                     <li>
                         
-                        <Link to='/home'><AiOutlineHome className='icon' />
+                        <Link to='/'><AiOutlineHome className='icon' />
                        <span>Início</span>
                        </Link>
                     </li>
@@ -58,8 +58,12 @@ const NavMenu = () => {
                     </li>
 
 
-
-                    
+                    <li>
+                        
+                        <Link to='/Contato'><AiOutlineMail className='icon' />
+                        <span>Contato</span>
+                       </Link>
+                    </li>
 
 
                 </ul>

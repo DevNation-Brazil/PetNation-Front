@@ -1,14 +1,10 @@
 .landingHeader {
     display: flex;
     justify-content: space-between;
-    background-color: #7982ac;
+
 }
 
-.logoLanging {
-    width: 380px;
-    height: 120px;
-    margin-top: 0.5em;
-}
+
 
 .listaLandingHeader {
     display: flex;
@@ -18,7 +14,7 @@
 }
 
 .itemListaLandingHeader {
-    color: #10162f;
+    
     font-size: 1.5em;
 }
 
@@ -28,3 +24,10 @@
     height: 1em;
 }
 
+
+
+.logoLanging {
+    width: 380px;
+    height: 120px;
+    margin-top: 0.5em;
+}
