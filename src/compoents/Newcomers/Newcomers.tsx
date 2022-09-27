@@ -10,7 +10,7 @@ function Newcomers() {
 
     return (
         <div className="newcomersWrapper">
-            {auth.user ? <TituloPadras texto={`Bem Vindo ${auth.user.name}!`} /> : <TituloPadras texto="Bem Vindo!" />}
+            {auth.user ? <TituloPadras texto={`Bem Vindo ${auth.user}!`} /> : <TituloPadras texto="Bem Vindo!" />}
             
             <div className="newcomersMain">
                 <div className="cardTextao cardTextaoBack">

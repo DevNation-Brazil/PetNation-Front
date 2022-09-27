@@ -14,7 +14,7 @@ function UserPage() {
     return (
         <div className="userPageWrapper">
 
-            <TituloPadras texto={`Seja bem vindo ${auth.user?.name}`} />
+            <TituloPadras texto={`Seja bem vindo ${auth.user}`} />
             <div className="botaoSairWrapper">
                 <button onClick={handleSignout} className="botaoSair">Sair</button>
             </div>

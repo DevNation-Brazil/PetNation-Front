@@ -22,10 +22,13 @@ function Login() {
     
     const handleLogin = async (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
+
         if(email && password) {
             const isLogged = await auth.signin(email, password);
+            console.log(isLogged)
             if(isLogged) {
-               console.log("gg")
+                // window.location.href = "http://localhost:3000"
+                navigate('/')
             } else {
                 alert("E-mail ou senha incorretos.")
             }
@@ -66,7 +69,6 @@ function Login() {
                     id="password-input"
                     label="Digite sua senha"
                     type="password"
-                    autoComplete="current-password"
                     variant="standard"
                     required
                     sx={{ width: {xs: 250,

@@ -8,9 +8,15 @@ import { ITipo } from "../../Interfaces/tipo";
 import axios from "axios";
 import { IRaca } from "../../Interfaces/raca";
 import TituloPadras from "../TituloPadras/TituloPadras";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/Auto/AuthContext";
 
 
 function Cadastro() {
+    const auth = useContext(AuthContext);
+    //console.log(`nome: ${auth.user}/ token: ${auth.userToken}/ tipo token: ${auth.tipoToken}` )
+    const token = auth.userToken
+    const tipoToken = auth.tipoToken
 
     // referente ao alert de confirmação de cadastro
     const [active, setActive] = useState(false)
@@ -114,7 +120,12 @@ function Cadastro() {
                 },
                 porte: porte,
                 idade: idade,
-        })
+        },{
+            headers: {
+                'Authorization': `${tipoToken} ${token}`
+            },
+        } )
+
             .then(() => {
                 setNome('')
                 setTipos([])

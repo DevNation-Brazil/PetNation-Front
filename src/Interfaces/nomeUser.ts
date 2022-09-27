@@ -1,7 +1,6 @@
-export interface IUser {
-    id?: number
+export interface InomeUser {
+    id: number
     nomeUser: string
     emailUser: string
-    userId: string
     password?: string
 }

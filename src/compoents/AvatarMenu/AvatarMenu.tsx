@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./AvatarMenu.css"
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
-import { deepPurple, indigo } from "@mui/material/colors";
+import { indigo } from "@mui/material/colors";
 
 interface Props {
     nomeDaClasse: string;
@@ -21,8 +21,9 @@ function AvatarMenu({ nomeDaClasse }: Props) {
         window.location.href = window.location.href;
     }
 
-    var userName = auth.user?.name
-    var matches: RegExpMatchArray | null = []
+  
+    var userName = auth.user
+    var matches: any = []
     if (userName != undefined) {
         var matches = userName.match(/\b(\w)/g);
     }
@@ -47,7 +48,7 @@ function AvatarMenu({ nomeDaClasse }: Props) {
                             {matches}
                         </Avatar>
 
-                        <span>{auth.user?.name}</span>
+                        <span>{auth.user}</span>
 
                         <li className='user-buton-item'>
                             <button className="userMenuButton">

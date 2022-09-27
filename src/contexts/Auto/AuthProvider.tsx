@@ -5,27 +5,38 @@ import { AuthContext } from "./AuthContext"
 
 
 export const AuthProvider = ({ children }: { children: JSX.Element } ) => {
-    const [user, setUser] = useState<IUser | null>(null)
+    const [user, setUser] = useState<IUser | null | string>(null)
+    const [email, setEmail] = useState<IUser | null | string>(null)
+    const [userToken, setUserToken] = useState<IUser | null | string>(null)
+    const [tipoToken, setTipoToken] = useState<IUser | null | string>(null)
+    const [userId, setUserId] = useState<IUser | null | string>(null)
     const api = useApi();
 
-   /* useEffect(() => {
-        const validateToken = async () => {
-            const storageData = localStorage.getItem('authToken');
-            if(storageData) {
-                const data = await api.validateTolken(storageData);
-                if(data.user) {
-                    setUser(data.user)
-                }
-            }
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("nomeUser");
+        const loggedInEmail = localStorage.getItem("emailUser");
+        const loggedInToken = localStorage.getItem("token");
+        const loggedInTipo = localStorage.getItem("tipo");
+        const loggedInUserId = localStorage.getItem("userId");
+        if (loggedInUser) {
+          setUser(loggedInUser);
+          setEmail(loggedInEmail)
+          setUserToken(loggedInToken)
+          setTipoToken(loggedInTipo)
+          setUserId(loggedInUserId)
         }
-        validateToken();
-    }, []) */
+      }, []);
 
     const signin = async (email: string, password: string) => {
         const data = await api.signin(email, password)
-        if(data.user && data.token) {
-            setUser(data.user);
-            setToken(data.token)
+        if(data.user) {
+            setUser(data.user.nomeUser);
+            setToken(data.user.nomeUser, 
+                     data.user.emailUser,
+                     data.user.token,
+                     data.user.tipo,
+                     data.user.userId)
+            //console.log(user)
             return true;
         }
         return false;
@@ -33,17 +44,21 @@ export const AuthProvider = ({ children }: { children: JSX.Element } ) => {
 
     const signout = async () => {
         setUser(null);
-        setToken('');
+        setToken('', '', '', '', '');
         await api.signout();
 
     }
 
-    const setToken = (token: string) => {
-        localStorage.setItem('authToken', token)
+    const setToken = (nomeUser: string, emailUser: string, token: string, tipo: string, userId: string) => {
+        localStorage.setItem('nomeUser', nomeUser)
+        localStorage.setItem('emailUser', emailUser)
+        localStorage.setItem('token', token)
+        localStorage.setItem('tipo', tipo)
+        localStorage.setItem('userId', userId)
     }
 
     return (
-        <AuthContext.Provider value={{ user, signin, signout }} >
+        <AuthContext.Provider value={{ user, userToken, tipoToken, userId, signin, signout }} >
             {children}
         </AuthContext.Provider>
     )
