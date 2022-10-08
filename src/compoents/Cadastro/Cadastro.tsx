@@ -1,6 +1,7 @@
-import { Avatar, TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Button, Alert } from "@mui/material";
+import { Avatar, TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Alert } from "@mui/material";
 import { Box } from "@mui/system";
 import { AiOutlineSend } from "react-icons/ai";
+import { IoImageOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import doguito from "../../assets/doguito.svg"
 import "./Cadastro.css"
@@ -10,9 +11,12 @@ import { IRaca } from "../../Interfaces/raca";
 import TituloPadras from "../TituloPadras/TituloPadras";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
+import { useParams } from "react-router-dom";
+import { IAnimal } from "../../Interfaces/IAnimal";
 
 
 function Cadastro() {
+    const parametros = useParams()
     const auth = useContext(AuthContext);
     //console.log(`nome: ${auth.user}/ token: ${auth.userToken}/ tipo token: ${auth.tipoToken}` )
     const token = auth.userToken
@@ -57,12 +61,40 @@ function Cadastro() {
     }, [])
 
 
+    useEffect(() => {
+        if (parametros.id) {
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setSexoDoAnimal(resposta.data.sexo))
+
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setNome(resposta.data.nome))
+                console.log(nome)
+
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setTipo(resposta.data.tipo.nome))
+                console.log(tipo)
+
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setRaca(resposta.data.raca.nome))
+
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setPorte(resposta.data.porte))
+
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setIdade(resposta.data.idade))
+        }
+
+    }, [parametros])
+
+
+
+
     // Map para o autocomplete de tipo e raca
-   const tiposAutoComplete:string[] = tipos.map(tiposMapped => {
+    const tiposAutoComplete: string[] = tipos.map(tiposMapped => {
         return tiposMapped.nome
     })
 
-    const racasAutoComplete:string[] = racas.map(racasMapped => {
+    const racasAutoComplete: string[] = racas.map(racasMapped => {
         return racasMapped.nome
     })
 
@@ -71,7 +103,7 @@ function Cadastro() {
     // Imagem. Ver...
     const [imagem, setImagem] = useState<string | null | File>(doguito)
 
-    
+
 
     const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
         if (evento.target.files?.length) {
@@ -86,30 +118,12 @@ function Cadastro() {
     function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault()
 
-        const formData = new FormData();
-
-        formData.append('sexo', sexoDoAnimal)
-        formData.append('nome', nome)
-        formData.append('tipo', tipo)
-        formData.append('raca', raca)
-        formData.append('porte', porte)
-        formData.append('idade', idade)
+        
 
 
-        /* tem que usar o useParams do react-router-dom 
         if (parametros.id) {
 
-            axios.put(`http://localhost:8000/api/v2/restaurantes/${parametros.id}/`, {
-                nome: nomeRestaurante
-            })
-                .then(() => {
-                    alert("Restaurante atualizado com sucesso!")
-                })
-
-        } else {}
-       */
-
-        axios.post('http://localhost:8080/api/v1/pet', {
+            axios.patch(`http://localhost:8080/api/v1/pet/${parametros.id}/`, {
                 sexo: sexoDoAnimal,
                 nome: nome,
                 tipo: {
@@ -120,21 +134,45 @@ function Cadastro() {
                 },
                 porte: porte,
                 idade: idade,
-        },{
-            headers: {
-                'Authorization': `${tipoToken} ${token}`
-            },
-        } )
-
-            .then(() => {
-                setNome('')
-                setTipos([])
-                setRacas([])
-                setPortes([])
-                setIdade('')
+            }, {
+                headers: {
+                    'Authorization': `${tipoToken} ${token}`
+                },
+            })
+                .then(() => {
+                    alert("Pet atualizado com sucesso!")
                 })
-            
-        
+
+        } else {
+
+
+            axios.post('http://localhost:8080/api/v1/pet', {
+                sexo: sexoDoAnimal,
+                nome: nome,
+                tipo: {
+                    nome: tipo
+                },
+                raca: {
+                    nome: raca
+                },
+                porte: porte,
+                idade: idade,
+                userId: auth.userId,
+            }, {
+                headers: {
+                    'Authorization': `${tipoToken} ${token}`
+                },
+            })
+
+                .then(() => {
+                    setNome('')
+                    setTipos([])
+                    setRacas([])
+                    setPortes([])
+                    setIdade('')
+                })
+
+        }
 
         setActive(true)
         setTimeout(() => setActive(false), 5000)
@@ -155,8 +193,14 @@ function Cadastro() {
                 sx={{ width: 150, height: 150, marginTop: 1, marginBotton: 1 }} />
 
 
-
-            <input className="inputDeImagem" id="file-upload" type="file" onChange={selecionarArquivo} />
+            <label htmlFor="file-upload" className="inputDeImagem">
+                <input className="inputDeImagem"
+                    id="file-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={selecionarArquivo} />
+                Selecione uma imagem<IoImageOutline size={30} />
+            </label>
 
 
             <FormControl >
@@ -196,20 +240,20 @@ function Cadastro() {
 
 
 
-                <Autocomplete
-                    onChange={(event, value) => setTipo(value)}
-                    disablePortal
-                    id="tiposAutoComplete"
-                    options={tiposAutoComplete}
-                    sx={{ width: 300, marginTop: 1 }}
-                    renderInput={(params) => <TextField
-                        {...params}
-
-                        id="especieField"
-                        label="Tipos"
-                        variant="standard"
-                        required />}
-                />
+            <Autocomplete
+                onChange={(event, value) => setTipo(value)}
+                disablePortal
+                id="tiposAutoComplete"
+                options={tiposAutoComplete}
+                sx={{ width: 300, marginTop: 1 }}
+                renderInput={(params) => <TextField
+                    {...params}
+                    value={tipo}
+                    id="especieField"
+                    label="Tipos"
+                    variant="standard"
+                    required />}
+            />
 
 
 
@@ -228,7 +272,7 @@ function Cadastro() {
                     required />}
             />
 
-          
+
 
             <Autocomplete
                 onChange={(event, value) => setPorte(value)}
@@ -261,7 +305,7 @@ function Cadastro() {
                 Enviar  <div className="iconeDoBotao"><AiOutlineSend size={20} /></div></button>
 
 
-            
+
 
             {
                 /* Confirmação de cadastro */

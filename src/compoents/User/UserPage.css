@@ -1,8 +1,14 @@
+:root {
+    --bakcELetra: #10162f;
+    --subColorLetras: #636363;
+}
+
 .userPageWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    margin-bottom: 2em;
 }
 
 
@@ -30,3 +36,148 @@
 .botaoSair:hover{
     background-color: #8197c9;
 }
+
+.AnimalCardWrapperUser {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: center;
+    margin-top: 2em;
+    display: flex;
+}
+
+.cardWrapperUser {
+    
+    font-family: 'Roboto', sans-serif;
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+.carddUser {
+    
+    background-color: #F7F9FB;
+    box-shadow: -3px 4px 3px var(--bakcELetra);
+    border-radius: 0.5em;
+    min-width: 28rem;
+    height: 176px;
+    display: flex;
+    transition-duration: 0.5s;
+}
+
+.carddUser:hover {
+    transform: translate(+12px, -6px);
+    border: none;
+}
+
+.backCardUser {
+    background-color: var(--bakcELetra);
+    border-radius: 0.5em;
+
+}
+
+
+.cardImageUser {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    margin-left: 1rem;
+    width: 10rem;
+    height: 11rem;
+    object-fit: cover;
+}
+
+.cardImageWrapperUser {
+    width: 14rem;
+    height: 11rem;
+}
+
+.cardBodyUser {
+    margin: 1rem;
+    flex-grow: 1;
+}
+
+.cardTitleUser {
+    color: var(--bakcELetra);
+    line-height: 1.4rem;
+    font-size: 1.4em;
+    margin-bottom: 0.2em;
+}
+
+.cardSubtitleUser {
+    font-size: 0.8em;
+    color: var(--subColorLetras);
+    margin-bottom: 0.6em;
+}
+
+.cardTextUser {
+    font-size: 1em;
+    color: var(--subColorLetras);
+    padding: 1px;
+    line-height: 0.5rem;
+}
+
+.idadeEEdit {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userIconsWrapper {
+    display: flex;
+    gap: 0.5em;
+}
+
+
+.iconEditAnimalCardUser {
+    color: #6E85B7;
+}
+
+
+.iconEditAnimalCardUser:hover {
+    color: #10162f;
+}
+
+.iconTrashAnimalCardUser {
+    color: #7a0e0e
+}
+
+.iconTrashAnimalCardUser:hover {
+    color: #c51616;
+}
+
+
+@media (max-width:900px) {
+
+    .AnimalCardWrapperUser {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .carddUser {
+        flex-direction: column;
+        min-width: 14rem;
+        height: 360px;
+        background: white;
+    }
+
+    .cardImageUser {
+        border-top-right-radius: 0.5em;
+        border-bottom-left-radius: 0;
+        margin-left: 0.6em;
+        width: 90%;
+        height: 12rem;
+    }
+
+    .cardTitleUser {
+
+        margin-top: 0.6em;
+    }
+    
+    .cardSubtitleUser {
+
+        margin-top: 0.6em;
+    }
+}
+

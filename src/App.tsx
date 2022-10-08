@@ -24,6 +24,7 @@ function App() {
       <Route path="/colecao" element={<Colecao />} />
 
       <Route path='/cadastro' element={<RequireAuth><PaginaCadastro /></RequireAuth>} />
+      <Route path="/cadastro/:id" element={<RequireAuth><PaginaCadastro /></RequireAuth>} />
 
       <Route path="/contato" element={<PaginaContato />} />
 

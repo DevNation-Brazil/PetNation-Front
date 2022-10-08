@@ -28,7 +28,7 @@ function Login() {
             console.log(isLogged)
             if(isLogged) {
                 // window.location.href = "http://localhost:3000"
-                navigate('/')
+                navigate('/cadastro')
             } else {
                 alert("E-mail ou senha incorretos.")
             }

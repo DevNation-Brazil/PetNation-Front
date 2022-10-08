@@ -9,9 +9,28 @@
 }
 
 
+input[type="file"] {
+    display: none;
+}
+
 .inputDeImagem {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    
+    display: flex;
+    gap: 0.5em;
+    padding: 6px 12px;
+    width: 275px;
+    height: 50px;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.2em;
+    color: #10162f;
+    transition-duration: 1s;
+    cursor: pointer;
+}
+
+.inputDeImagem:hover {
+    color: #be3ead;
 }
 
 

@@ -4,7 +4,7 @@ import { IUser } from "../../Interfaces/IUser"
 import { AuthContext } from "./AuthContext"
 
 
-export const AuthProvider = ({ children }: { children: JSX.Element } ) => {
+export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const [user, setUser] = useState<IUser | null | string>(null)
     const [email, setEmail] = useState<IUser | null | string>(null)
     const [userToken, setUserToken] = useState<IUser | null | string>(null)
@@ -19,25 +19,32 @@ export const AuthProvider = ({ children }: { children: JSX.Element } ) => {
         const loggedInTipo = localStorage.getItem("tipo");
         const loggedInUserId = localStorage.getItem("userId");
         if (loggedInUser) {
-          setUser(loggedInUser);
-          setEmail(loggedInEmail)
-          setUserToken(loggedInToken)
-          setTipoToken(loggedInTipo)
-          setUserId(loggedInUserId)
+            setUser(loggedInUser);
+            setEmail(loggedInEmail)
+            setUserToken(loggedInToken)
+            setTipoToken(loggedInTipo)
+            setUserId(loggedInUserId)
         }
-      }, []);
+    }, []);
 
     const signin = async (email: string, password: string) => {
-        const data = await api.signin(email, password)
-        if(data.user) {
-            setUser(data.user.nomeUser);
-            setToken(data.user.nomeUser, 
-                     data.user.emailUser,
-                     data.user.token,
-                     data.user.tipo,
-                     data.user.userId)
-            //console.log(user)
-            return true;
+        try {
+            const data = await api.signin(email, password)
+            if (data.user) {
+                setUser(data.user.nomeUser);
+                setUserToken(data.user.token)
+                setTipoToken(data.user.tipo)
+                setUserId(data.user.userId)
+                setToken(data.user.nomeUser,
+                    data.user.emailUser,
+                    data.user.token,
+                    data.user.tipo,
+                    data.user.userId)
+                //console.log(user)
+                return true;
+            }
+        } catch (error) {
+            console.log(error)
         }
         return false;
     }
