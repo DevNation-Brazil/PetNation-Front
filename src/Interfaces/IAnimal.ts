@@ -10,4 +10,5 @@ export interface IAnimal {
   raca: IRaca
   tipo: ITipo
   userId: string
+  imageSource: string
   }

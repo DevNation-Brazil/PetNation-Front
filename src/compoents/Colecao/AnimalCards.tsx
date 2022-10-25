@@ -32,7 +32,7 @@ function AnimalCards() {
                     <div className="cardWrapper backCard" key={petsMapped.id}>
                         <div className="cardd">
                             <div className="cardImageWrapper">
-                            <img className="cardImage" src={doguito} />
+                            <img className="cardImage" src={petsMapped.imageSource ?? doguito} />
                             </div>
                             <div className="cardBody">
                                 <h3 className="cardTitle" key={petsMapped.nome}>{petsMapped.nome}</h3>

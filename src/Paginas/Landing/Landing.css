@@ -16,7 +16,7 @@
 
 .carouselCard {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 2em;
     /*background-color: #F7F9FB;*/
     margin-left: 2em;

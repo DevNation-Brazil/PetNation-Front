@@ -121,6 +121,7 @@
         margin-left: 0.6em;
         width: 90%;
         height: 12rem;
+        object-fit: cover;
     }
 
     .cardTitle {

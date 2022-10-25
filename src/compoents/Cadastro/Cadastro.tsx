@@ -1,4 +1,4 @@
-import { Avatar, TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Alert } from "@mui/material";
+import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Alert } from "@mui/material";
 import { Box } from "@mui/system";
 import { AiOutlineSend } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
 import { useParams } from "react-router-dom";
 import { IAnimal } from "../../Interfaces/IAnimal";
+
 
 
 function Cadastro() {
@@ -43,7 +44,31 @@ function Cadastro() {
     const [racas, setRacas] = useState<IRaca[]>([])
     const [portes, setPortes] = useState<string[]>([])
 
+    // Imagem. Ver...
+    const [image, setImage] = useState<File | null>()
+    const [preview, setPreview] = useState<string | null | any>()
 
+
+
+    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        if (evento.target.files?.length) {
+            setImage(evento.target.files[0])
+        } else {
+            setImage(null)
+        }
+    } 
+
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result as string);
+            }
+            reader.readAsDataURL(image);
+        } else {
+            setPreview(null);
+        }
+    }, [image])
 
     //Get auto complete de tipo e raca
 
@@ -68,11 +93,11 @@ function Cadastro() {
 
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setNome(resposta.data.nome))
-                console.log(nome)
+            console.log(nome)
 
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setTipo(resposta.data.tipo.nome))
-                console.log(tipo)
+            console.log(tipo)
 
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setRaca(resposta.data.raca.nome))
@@ -100,26 +125,33 @@ function Cadastro() {
 
 
 
-    // Imagem. Ver...
-    const [imagem, setImagem] = useState<string | null | File>(doguito)
-
-
-
-    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
-        if (evento.target.files?.length) {
-            setImagem(evento.target.files[0])
-        } else {
-            setImagem(null)
-        }
-    }
-
-
-
     function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault()
+        const petObject = {
+            sexo: sexoDoAnimal,
+            nome: nome,
+            tipo: {
+                nome: tipo
+            },
+            raca: {
+                nome: raca
+            },
+            porte: porte,
+            idade: idade,
+            userId: auth.userId,
+            userName: auth.user
+        }
+        const json = JSON.stringify(petObject);
+const blob = new Blob([json], {
+  type: 'application/json'
+});
 
+        const formDataPet: any = new FormData();
+        formDataPet.append("DTO", blob)
         
-
+        if (image) {
+        formDataPet.append("file", image)
+        }
 
         if (parametros.id) {
 
@@ -139,45 +171,31 @@ function Cadastro() {
                     'Authorization': `${tipoToken} ${token}`
                 },
             })
-                .then(() => {
-                    alert("Pet atualizado com sucesso!")
-                })
 
         } else {
-
-
-            axios.post('http://localhost:8080/api/v1/pet', {
-                sexo: sexoDoAnimal,
-                nome: nome,
-                tipo: {
-                    nome: tipo
-                },
-                raca: {
-                    nome: raca
-                },
-                porte: porte,
-                idade: idade,
-                userId: auth.userId,
-            }, {
+            axios.request({
+                url: 'http://localhost:8080/api/v1/pet',
+                method: 'POST',
                 headers: {
                     'Authorization': `${tipoToken} ${token}`
                 },
+                data: formDataPet
             })
-
-                .then(() => {
+                    .then(() => {
                     setNome('')
                     setTipos([])
                     setRacas([])
                     setPortes([])
                     setIdade('')
                 })
-
         }
 
         setActive(true)
         setTimeout(() => setActive(false), 5000)
-
     }
+
+
+    
 
 
     return (
@@ -185,22 +203,32 @@ function Cadastro() {
 
 
 
-            <TituloPadras texto="Cadastre seu Pet" />
-
-            <Avatar alt="Imagem Place Holder"
-                src={doguito}
-                className="avatarImg"
-                sx={{ width: 150, height: 150, marginTop: 1, marginBotton: 1 }} />
+            <TituloPadras texto={parametros.id ? 'Atualize seu Pet' : 'Cadastre seu Pet'} />
 
 
             <label htmlFor="file-upload" className="inputDeImagem">
-                <input className="inputDeImagem"
-                    id="file-upload"
-                    type="file"
-                    accept="image/*"
-                    onChange={selecionarArquivo} />
-                Selecione uma imagem<IoImageOutline size={30} />
+                <div>
+                    {preview ? (<img className="imagePreview" src={preview} />) 
+                             : (<img className="imagePreview" src={doguito} />)}
+                </div>
+
+                <div>
+                    <input className="inputDeImagem"
+                        id="file-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={(event) => {
+                            const file: any = event.target.files![0];
+                            if (file) {
+                                setImage(file)
+                            } else {
+                                setImage(null)
+                            }
+                        }} />
+                    Selecione uma imagem <IoImageOutline size={30}  className='imagePreviewIcon'/>
+                </div>
             </label>
+
 
 
             <FormControl >
@@ -333,7 +361,7 @@ function Cadastro() {
                             xl: 600,
                         },
                         marginTop: 2,
-                    }}>Pet cadastrado com sucesso!
+                    }}>{parametros.id ? 'Pet atualizado com sucesso!' : 'Pet cadastrado com sucesso!'}
                     </Alert>
             }
         </Box>

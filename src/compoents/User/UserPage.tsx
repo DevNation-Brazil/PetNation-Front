@@ -57,7 +57,7 @@ function UserPage() {
 
             <div className="colecaoWrapper">
 
-                <TituloPadras texto="Pets Cadastrados" />
+                <TituloPadras texto="Seus Pets Cadastrados" />
 
                 <div className="AnimalCardWrapperUser">
 

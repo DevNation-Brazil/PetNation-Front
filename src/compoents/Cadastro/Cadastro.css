@@ -14,12 +14,13 @@ input[type="file"] {
 }
 
 .inputDeImagem {
-    
     display: flex;
+    flex-direction: column;
     gap: 0.5em;
-    padding: 6px 12px;
+    align-items: center;
+    margin-bottom: 1em;
     width: 275px;
-    height: 50px;
+    height: 14rem;
     border: none;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
@@ -27,6 +28,17 @@ input[type="file"] {
     color: #10162f;
     transition-duration: 1s;
     cursor: pointer;
+}
+
+.imagePreview {
+    border-radius: 0.5em;
+    object-fit: cover;
+    width: 100%;
+    height: 12rem;
+}
+
+.imagePreviewIcon {
+    margin-left: 0.2em;
 }
 
 .inputDeImagem:hover {
@@ -38,7 +50,7 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 1em;
     background-color: #6E85B7;
     width: 105px;
     height: 50px;

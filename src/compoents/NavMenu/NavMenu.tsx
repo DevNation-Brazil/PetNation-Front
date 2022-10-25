@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { IoMdClose, IoMdMenu } from 'react-icons/io'
 import { IoImagesOutline } from "react-icons/io5";
 import { AiOutlineForm, AiOutlineHome, AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { Link } from 'react-router-dom'
+import { AuthContext } from "../../contexts/Auto/AuthContext";
 import './NavMenu.css'
 
 const NavMenu = () => {
+    const auth = useContext(AuthContext)
 
     const [active, setActive] = useState(false)
 
@@ -36,7 +38,7 @@ const NavMenu = () => {
                     <li>
                         
                         <Link to='/login'><AiOutlineUser className='icon' />
-                        <span>Login</span>
+                        <span>{auth.user ? 'Página do usuário' : 'Login'}</span>
                        </Link>
                     </li>
 
