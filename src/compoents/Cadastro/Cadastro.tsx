@@ -142,9 +142,9 @@ function Cadastro() {
             userName: auth.user
         }
         const json = JSON.stringify(petObject);
-const blob = new Blob([json], {
-  type: 'application/json'
-});
+        const blob = new Blob([json], {
+        type: 'application/json'
+    });
 
         const formDataPet: any = new FormData();
         formDataPet.append("DTO", blob)
@@ -155,22 +155,21 @@ const blob = new Blob([json], {
 
         if (parametros.id) {
 
-            axios.patch(`http://localhost:8080/api/v1/pet/${parametros.id}/`, {
-                sexo: sexoDoAnimal,
-                nome: nome,
-                tipo: {
-                    nome: tipo
-                },
-                raca: {
-                    nome: raca
-                },
-                porte: porte,
-                idade: idade,
-            }, {
+            axios.request({
+                url: `http://localhost:8080/api/v1/pet/${parametros.id}/`,
+                method: 'PATCH',
                 headers: {
                     'Authorization': `${tipoToken} ${token}`
                 },
+                data: formDataPet
             })
+                    .then(() => {
+                    setNome('')
+                    setTipos([])
+                    setRacas([])
+                    setPortes([])
+                    setIdade('')
+                })
 
         } else {
             axios.request({
