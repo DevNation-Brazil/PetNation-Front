@@ -66,7 +66,7 @@ function UserPage() {
                         <div className="cardWrapperUser backCardUser" key={petsMapped.id}>
                             <div className="carddUser">
                                 <div className="cardImageWrapperUser">
-                                    <img className="cardImageUser" src={doguito} />
+                                    <img className={petsMapped.imageSource ? "cardImage" : "cardImageDoguito"} src={petsMapped.imageSource ?? doguito} />
                                 </div>
                                 <div className="cardBodyUser">
                                     <h3 className="cardTitleUser" key={petsMapped.nome}>{petsMapped.nome}</h3>

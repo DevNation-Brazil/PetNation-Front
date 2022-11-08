@@ -45,7 +45,7 @@ function Cadastro() {
     const [portes, setPortes] = useState<string[]>([])
 
     // Imagem. Ver...
-    const [image, setImage] = useState<File | null>()
+    const [image, setImage] = useState<File | null>(null)
     const [preview, setPreview] = useState<string | null | any>()
 
 
@@ -56,7 +56,7 @@ function Cadastro() {
         } else {
             setImage(null)
         }
-    } 
+    }
 
     useEffect(() => {
         if (image) {
@@ -142,15 +142,15 @@ function Cadastro() {
             userName: auth.user
         }
         const json = JSON.stringify(petObject);
-const blob = new Blob([json], {
-  type: 'application/json'
-});
+        const blob = new Blob([json], {
+            type: 'application/json'
+        });
 
         const formDataPet: any = new FormData();
         formDataPet.append("DTO", blob)
-        
+
         if (image) {
-        formDataPet.append("file", image)
+            formDataPet.append("file", image)
         }
 
         if (parametros.id) {
@@ -181,7 +181,7 @@ const blob = new Blob([json], {
                 },
                 data: formDataPet
             })
-                    .then(() => {
+                .then(() => {
                     setNome('')
                     setTipos([])
                     setRacas([])
@@ -195,7 +195,7 @@ const blob = new Blob([json], {
     }
 
 
-    
+
 
 
     return (
@@ -208,8 +208,8 @@ const blob = new Blob([json], {
 
             <label htmlFor="file-upload" className="inputDeImagem">
                 <div>
-                    {preview ? (<img className="imagePreview" src={preview} />) 
-                             : (<img className="imagePreview" src={doguito} />)}
+                    {preview ? (<img className="imagePreview" src={preview} />)
+                        : (<img className="imagePreview" src={doguito} />)}
                 </div>
 
                 <div>
@@ -225,7 +225,7 @@ const blob = new Blob([json], {
                                 setImage(null)
                             }
                         }} />
-                    Selecione uma imagem <IoImageOutline size={30}  className='imagePreviewIcon'/>
+                    Selecione uma imagem <IoImageOutline size={30} className='imagePreviewIcon' />
                 </div>
             </label>
 
