@@ -6,6 +6,7 @@
     background-color: #6E85B7;
     box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.25);
     z-index: 10;
+    transition-duration: 0.5s;
 }
 
 .navMenu-mobile {
@@ -17,6 +18,7 @@
     background-color: #6E85B7;
     box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.25);
     z-index: 10;
+    transition-duration: 0.5s;
 }
 
 nav > ul {

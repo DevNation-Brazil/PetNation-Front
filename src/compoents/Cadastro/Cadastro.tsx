@@ -1,4 +1,4 @@
-import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Alert } from "@mui/material";
+import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, Alert, Snackbar } from "@mui/material";
 import { Box } from "@mui/system";
 import { AiOutlineSend } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
 import { useParams } from "react-router-dom";
 import { IAnimal } from "../../Interfaces/IAnimal";
+import { validacaoNome } from "../../models/validacoes";
 
 
 
@@ -26,6 +27,10 @@ function Cadastro() {
     // referente ao alert de confirmação de cadastro
     const [active, setActive] = useState(false)
 
+    function handleClose() {
+        setActive(false)
+    }
+
 
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +39,8 @@ function Cadastro() {
 
     const [sexoDoAnimal, setSexoDoAnimal] = useState<string>('');
     const [nome, setNome] = useState<string>('')
+    const [errorNome, setErrorNome] = useState({ nome: { valido: true, texto: '' } })
+
     const [tipo, setTipo] = useState<any | null>('')
     const [raca, setRaca] = useState<any | null>('')
     const [porte, setPorte] = useState<any | null>('')
@@ -49,14 +56,6 @@ function Cadastro() {
     const [preview, setPreview] = useState<string | null | any>()
 
 
-
-    const selecionarArquivo = (evento: React.ChangeEvent<HTMLInputElement>) => {
-        if (evento.target.files?.length) {
-            setImage(evento.target.files[0])
-        } else {
-            setImage(null)
-        }
-    }
 
     useEffect(() => {
         if (image) {
@@ -141,15 +140,11 @@ function Cadastro() {
             userId: auth.userId,
             userName: auth.user
         }
+
         const json = JSON.stringify(petObject);
         const blob = new Blob([json], {
-<<<<<<< HEAD
             type: 'application/json'
         });
-=======
-        type: 'application/json'
-    });
->>>>>>> 000c96f9892049070c2d1fa1c3fe5ebeb8acb332
 
         const formDataPet: any = new FormData();
         formDataPet.append("DTO", blob)
@@ -158,47 +153,42 @@ function Cadastro() {
             formDataPet.append("file", image)
         }
 
-        if (parametros.id) {
+        if (errorNome.nome.valido) {
+            if (parametros.id) {
 
-            axios.request({
-                url: `http://localhost:8080/api/v1/pet/${parametros.id}/`,
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `${tipoToken} ${token}`
-                },
-                data: formDataPet
-            })
+                axios.request({
+                    url: `http://localhost:8080/api/v1/pet/${parametros.id}/`,
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `${tipoToken} ${token}`
+                    },
+                    data: formDataPet
+                })
                     .then(() => {
-                    setNome('')
-                    setTipos([])
-                    setRacas([])
-                    setPortes([])
-                    setIdade('')
-                })
+                        setNome('')
+                        setIdade('')
+                        setPreview('')
+                    })
 
-        } else {
-            axios.request({
-                url: 'http://localhost:8080/api/v1/pet',
-                method: 'POST',
-                headers: {
-                    'Authorization': `${tipoToken} ${token}`
-                },
-                data: formDataPet
-            })
-                .then(() => {
-                    setNome('')
-                    setTipos([])
-                    setRacas([])
-                    setPortes([])
-                    setIdade('')
+            } else {
+                axios.request({
+                    url: 'http://localhost:8080/api/v1/pet',
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `${tipoToken} ${token}`
+                    },
+                    data: formDataPet
                 })
+                    .then(() => {
+                        setNome('')
+                        setTipo('')
+                        setPreview('')
+                    })
+            }
+            setActive(true)
         }
-
-        setActive(true)
-        setTimeout(() => setActive(false), 5000)
+        
     }
-
-
 
 
 
@@ -213,7 +203,7 @@ function Cadastro() {
             <label htmlFor="file-upload" className="inputDeImagem">
                 <div>
                     {preview ? (<img className="imagePreview" src={preview} />)
-                        : (<img className="imagePreview" src={doguito} />)}
+                             : (<img className="imagePreview" src={doguito} />)}
                 </div>
 
                 <div>
@@ -263,22 +253,33 @@ function Cadastro() {
                 onChange={(event) => {
                     setNome(event.target.value);
                 }}
+
+                error={!errorNome.nome.valido}
+                helperText={errorNome.nome.texto}
+
+                onBlur={(event) => {
+                    const ehValido = validacaoNome(event.target.value)
+                    setErrorNome({ nome: ehValido })
+                }}
                 id="nomeField"
                 label="Nome"
                 variant="standard"
                 required
-                sx={{ width: 300, marginTop: 1 }} />
+                sx={{ width: 280, marginTop: 1 }} />
 
 
 
 
             <Autocomplete
-                onChange={(event, value) => setTipo(value)}
+                onChange={(event, value) => setTipo(value)} 
                 disablePortal
                 id="tiposAutoComplete"
                 options={tiposAutoComplete}
-                sx={{ width: 300, marginTop: 1 }}
+                sx={{ width: 280, marginTop: 1 }}
                 renderInput={(params) => <TextField
+                    onChange={(event) => {
+                        setTipo(event.target.value);
+                    }}
                     {...params}
                     value={tipo}
                     id="especieField"
@@ -294,11 +295,12 @@ function Cadastro() {
                 disablePortal
                 id="racaAutoComplete"
                 options={racasAutoComplete}
-                sx={{ width: 300, marginTop: 1 }}
+                sx={{ width: 280, marginTop: 1 }}
                 renderInput={(params) => <TextField
 
                     {...params}
                     id="racaField"
+                    value={raca}
                     label="Raça"
                     variant="standard"
                     required />}
@@ -311,10 +313,11 @@ function Cadastro() {
                 disablePortal
                 id="porteAutoComplete"
                 options={portes}
-                sx={{ width: 300, marginTop: 1 }}
+                sx={{ width: 280, marginTop: 1 }}
                 renderInput={(params) => <TextField
 
                     {...params}
+                    value={porte}
                     id="porteField"
                     label="Porte"
                     variant="standard"
@@ -331,43 +334,38 @@ function Cadastro() {
                 type="number"
 
                 required
-                sx={{ width: 300, marginTop: 1 }} />
+                sx={{ width: 280, marginTop: 1 }} />
 
             <button className="botaoEnviar" type="submit" >
                 Enviar  <div className="iconeDoBotao"><AiOutlineSend size={20} /></div></button>
 
 
 
+            <Snackbar
+                className='alert'
+                open={active}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                sx={{
+                    width: {
+                        xs: 360,
+                        sm: 370,
+                        md: 370,
+                        lg: 600,
+                        xl: 600,
+                    },
+                    height: "5%"
+                }}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center"
+                }} >
 
-            {
-                /* Confirmação de cadastro */
-                !active ?
-                    <Alert sx={{
-                        width: {
-                            xs: 280,
-                            sm: 320,
-                            md: 350,
-                            lg: 500,
-                            xl: 600,
-                        },
-                        marginTop: 2,
-                        display: 'none'
-                    }}
-                        severity="success"
-                        className='alert'>Pet cadastrado com sucesso!
-                    </Alert> :
-                    <Alert sx={{
-                        width: {
-                            xs: 280,
-                            sm: 320,
-                            md: 350,
-                            lg: 500,
-                            xl: 600,
-                        },
-                        marginTop: 2,
-                    }}>{parametros.id ? 'Pet atualizado com sucesso!' : 'Pet cadastrado com sucesso!'}
-                    </Alert>
-            }
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%', textAlign: "center" }}>
+                    Pet cadastrado com sucesso!
+                </Alert>
+
+            </Snackbar>
         </Box>
 
 

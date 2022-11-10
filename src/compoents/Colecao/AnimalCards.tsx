@@ -40,7 +40,8 @@ function AnimalCards() {
                                 <p className="cardText" key={petsMapped.tipo.nome}>Tipo: {petsMapped.tipo.nome}</p>
                                 <p className="cardText" key={petsMapped.raca.nome}>Raça: {petsMapped.raca.nome}</p>
                                 <p className="cardText" key={petsMapped.porte}>Tamanho: {petsMapped.porte}</p>
-                                <p className="cardText" key={petsMapped.idade}>Idade: {petsMapped.idade}</p>
+                                <p className="cardText" key={petsMapped.idade}>Idade: {petsMapped.idade}{Number(petsMapped.idade) > 1 ? ' anos' : ' ano'}</p>
+                                <p className="cardText" key={petsMapped.userName}>Melhor amigo: {petsMapped.userName}</p>
 
                             </div>
                         </div>

@@ -24,27 +24,21 @@ function CriarConta() {
 
     const handleCriaConta = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
-        if (errorNome.nome.valido) {
+        if (errorNome.nome.valido && errorEmail.email.valido && errorPassword.password.valido) {
             axios.post('http://localhost:8080/user', {
             nome: nome,
             email: email,
             password: password,
         })
+            
             .then(() => {
                 navigate('/login')
             })
+            alert('Faça o login e cadastre seu pet.')
         }
         
     }
 
-    /*
-    let tempNome = event.target.value
-                        if(tempNome.length >= 10) {
-                            tempNome = tempNome.substring(0, 10)
-                        }
-
-                        setNome(tempNome)
-                        */
 
     return (
         <div className="criarContaWrapper">

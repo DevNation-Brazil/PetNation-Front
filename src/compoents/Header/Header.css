@@ -65,7 +65,7 @@
     .logo {
         width: 150px;
         height: 45px;
-        margin-left: 1.6em;
+        margin-left: 4em;
     }
 
     .loginHeader {
@@ -78,5 +78,26 @@
 
     .loginHeaderAvatar {
         margin-top: 0;
+    }
+}
+
+@media (max-width:600px) {
+
+    .logo {
+        margin-left: 2.1em;
+    }
+}
+
+@media (max-width:500px) {
+
+    .logo {
+        margin-left: 1.6em;
+    }
+}
+
+@media (max-width:400px) {
+
+    .logo {
+        margin-left: 1.6em;
     }
 }

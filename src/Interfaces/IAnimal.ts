@@ -11,4 +11,5 @@ export interface IAnimal {
   tipo: ITipo
   userId: string
   imageSource: string
+  userName: string
   }

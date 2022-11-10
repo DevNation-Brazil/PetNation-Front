@@ -16,7 +16,7 @@
     text-align: center;
     background-color: #F7F9FB;
     border-radius: 0.5em;
-    height: 430px;
+    height: 450px;
     box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -76,9 +76,6 @@
 }
 
 
-
-
-
 @media (max-width:900px) {
 
     .loginWrapper {
@@ -87,6 +84,7 @@
 
     .criarContaWrapper {
         width: 300px;
+        height: 500px;
     }
 
     .loginTitle {

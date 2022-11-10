@@ -1,7 +1,7 @@
 export function validacaoNome(nome: string) {
-    //var regexp = /^[^0-9]+$/;    || !nome.match(regexp)
-    if (nome.length >= 10 ) {
-        return { valido: false, texto: 'Nome deve conter apenas 10 caracteres.' }
+    var regexp = /^[^0-9]+$/;    
+    if (nome.length >= 10 || !nome.match(regexp)) {
+        return { valido: false, texto: 'Nome deve conter até 10 caracteres sem números.' }
     } else {
         return { valido: true, texto: '' }
     }
@@ -18,7 +18,7 @@ export function validacaoEmail(email: string) {
 }
 
 export function validacaoPassword(password: string) {
-    var regexp = /^\S/;
+    var regexp = /\s/;
     if (password.length < 8 || password.match(regexp)) {
         return { valido: false, texto: 'Sua senha deve conter no mínimo 8 caracteres sem espaços.' }
     } else {
