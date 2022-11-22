@@ -53,7 +53,7 @@ function CriarConta() {
                 }
             }}>
 
-                <h3 className="loginTitle">Crie sua para cadastrar seu pet.</h3>
+                <h3 className="loginTitle">Crie sua conta para cadastrar seu pet.</h3>
 
 
                 <TextField

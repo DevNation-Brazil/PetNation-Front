@@ -8,8 +8,14 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import "./UserPage.css"
 import { Link } from "react-router-dom";
+import Alerts from "../Alerts/Alerts";
 
 function UserPage() {
+     // referente ao alert de erro 
+     const [activeError, setActiveError] = useState(false)
+     const [errorMessage, setErrorMessage] = useState('')
+
+
     const auth = useContext(AuthContext);
 
     const token = auth.userToken
@@ -25,6 +31,11 @@ function UserPage() {
     useEffect(() => {
         axios.get<IAnimal[]>(`http://localhost:8080/api/v1/pet/`)
             .then(resposta => setPets(resposta.data.filter(value => auth.userId == value.userId)))
+
+            .catch(function (error) {
+                setActiveError(true)
+                setErrorMessage(error)
+            })
 
     }, [])
 
@@ -50,9 +61,7 @@ function UserPage() {
             <div className="userPageWrapper">
 
                 <TituloPadras texto={`Olá ${auth.user}`} />
-                <div className="botaoSairWrapper">
-                    <button onClick={handleSignout} className="botaoSair">Sair</button>
-                </div>
+                
             </div>
 
             <div className="colecaoWrapper">
@@ -96,6 +105,14 @@ function UserPage() {
 
                 </div>
             </div>
+
+            <Alerts
+                active={activeError}
+                setActive={setActiveError}
+                severity={'error'}
+                message={`${errorMessage}`}
+
+            />
         </div>
     );
 }

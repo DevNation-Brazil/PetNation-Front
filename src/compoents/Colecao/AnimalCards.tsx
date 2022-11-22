@@ -4,10 +4,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IAnimal } from "../../Interfaces/IAnimal";
 import TituloPadras from "../TituloPadras/TituloPadras";
+import Alerts from "../Alerts/Alerts";
 
 
 
 function AnimalCards() {
+    // referente ao alert de erro 
+    const [activeError, setActiveError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const [pets, setPets] = useState<IAnimal[]>([])
 
@@ -17,12 +21,17 @@ function AnimalCards() {
         axios.get<IAnimal[]>(`http://localhost:8080/api/v1/pet`)
             .then(resposta => setPets(resposta.data))
 
+            .catch(function (error) {
+                setActiveError(true)
+                setErrorMessage(error)
+            })
+
     }, [])
 
 
     return (
         <div className="colecaoWrapper">
-            
+
             <TituloPadras texto="Pets Cadastrados" />
 
             <div className="AnimalCardWrapper">
@@ -32,7 +41,7 @@ function AnimalCards() {
                     <div className="cardWrapper backCard" key={petsMapped.id}>
                         <div className="cardd">
                             <div className="cardImageWrapper">
-                            <img className={petsMapped.imageSource ? "cardImage" : "cardImageDoguito"} src={petsMapped.imageSource ?? doguito} />
+                                <img className={petsMapped.imageSource ? "cardImage" : "cardImageDoguito"} src={petsMapped.imageSource ?? doguito} />
                             </div>
                             <div className="cardBody">
                                 <h3 className="cardTitle" key={petsMapped.nome}>{petsMapped.nome}</h3>
@@ -49,6 +58,14 @@ function AnimalCards() {
                 )}
 
             </div>
+
+            <Alerts
+                active={activeError}
+                setActive={setActiveError}
+                severity={'error'}
+                message={`${errorMessage}`}
+
+            />
         </div>
     );
 }

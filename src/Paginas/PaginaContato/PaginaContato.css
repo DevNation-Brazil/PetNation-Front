@@ -1,0 +1,51 @@
+.contatoText {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.cardContatoText {
+    border-radius: 0.5em;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F7F9FB;
+    width: 45em;
+    margin-right: 4em;
+}
+
+.titleContatoTexttao {
+    font-weight: 700;
+    margin-top: 1em;
+    text-align: center;
+    color: #10162f;
+    font-size: 1.5rem;
+}
+
+.textoContatoText {
+    padding: 1em;
+    color: #10162f;
+    font-size: 1rem;
+    text-align: justify;
+    text-indent: 1.4em;
+
+}
+
+@media (max-width:900px) {
+
+    .contatoText {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2em;
+        margin-left: 2em;
+    }
+
+    .cardContatoText {
+        width: 17em;
+        margin-right: 0;
+        margin-bottom: 2em;
+    }
+}

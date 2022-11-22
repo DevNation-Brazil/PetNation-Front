@@ -29,9 +29,9 @@ function Contato() {
                 <CardContent>
                     <Typography sx={{ marginBottom: 1 }}> 
                         <a className="gitLink" href="https://github.com/Rutiquewiski">
-                            <div className="contactIcon">
+                            
                                 <AiFillGithub />
-                            </div> Github </a></Typography>
+                             Github </a></Typography>
                     <span className="mailP">
                         <div className="contactIcon">
                             <AiFillMail />
@@ -60,11 +60,10 @@ function Contato() {
                 />
 
                 <CardContent >
-                    <Typography sx={{ marginBottom: 1 }}>
+                    <Typography sx={{ marginBottom: 1 }} className="gitGit">
                         <a className="gitLink" href="https://github.com/VagnerSR">
-                            <div className="contactIcon">
                                 <AiFillGithub className="gitIcon"/>
-                            </div> Github </a></Typography>
+                             Github </a></Typography>
 
                     <span className="mailP">
                         <div className="contactIcon">

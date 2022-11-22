@@ -25,22 +25,24 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
             setTipoToken(loggedInTipo)
             setUserId(loggedInUserId)
         }
-        
-        var hours = 1; // to clear the localStorage after 1 hour
-        // (if someone want to clear after 8hrs simply change hours=8)
-        var now: any = new Date().getTime();
-        var setupTime: any = localStorage.getItem('setupTime');
-        if (setupTime == null) {
-            localStorage.setItem('setupTime', now)
-        } else {
-            if (now - setupTime > hours * 60 * 60 * 1000) {
-                localStorage.clear()
-                localStorage.setItem('setupTime', now);
-            }
-        }
+
+
     }, []);
 
     const signin = async (email: string, password: string) => {
+        var hours = 1; // to clear the localStorage after 1 hour
+            // (if someone want to clear after 8hrs simply change hours=8)
+            var now: any = new Date().getTime();
+            var setupTime: any = localStorage.getItem('setupTime');
+            if (setupTime == null) {
+                localStorage.setItem('setupTime', now)
+            } else {
+                if (now - setupTime > hours * 60 * 60 * 1000) {
+                    localStorage.clear()
+                    localStorage.setItem('setupTime', now);
+                }
+            }
+            
         try {
             const data = await api.signin(email, password)
             if (data.user) {
@@ -56,6 +58,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
                 //console.log(user)
                 return true;
             }
+
         } catch (error) {
             console.log(error)
         }
@@ -63,8 +66,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     }
 
     const signout = async () => {
-        setUser(null);
-        setToken('', '', '', '', '');
+        localStorage.clear();
         await api.signout();
 
     }

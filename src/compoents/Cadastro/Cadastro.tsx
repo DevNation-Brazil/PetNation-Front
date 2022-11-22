@@ -14,6 +14,7 @@ import { AuthContext } from "../../contexts/Auto/AuthContext";
 import { useParams } from "react-router-dom";
 import { IAnimal } from "../../Interfaces/IAnimal";
 import { validacaoNome } from "../../models/validacoes";
+import Alerts from "../Alerts/Alerts";
 
 
 
@@ -27,23 +28,21 @@ function Cadastro() {
     // referente ao alert de confirmação de cadastro
     const [active, setActive] = useState(false)
 
-    function handleClose() {
-        setActive(false)
-    }
+    // referente ao alert de erro 
+    const [activeError, setActiveError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
-
-
-    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSexoDoAnimal((event.target as HTMLInputElement).value);
-    };
 
     const [sexoDoAnimal, setSexoDoAnimal] = useState<string>('');
     const [nome, setNome] = useState<string>('')
     const [errorNome, setErrorNome] = useState({ nome: { valido: true, texto: '' } })
 
     const [tipo, setTipo] = useState<any | null>('')
+    const [clearTipo, setClearTipo] = useState<number>(1165516)
     const [raca, setRaca] = useState<any | null>('')
+    const [clearRaca, setClearRaca] = useState<number>(3041856018)
     const [porte, setPorte] = useState<any | null>('')
+    const [clearPorte, setClearPorte] = useState<number>(10566515)
     const [idade, setIdade] = useState<string>('')
 
 
@@ -54,6 +53,7 @@ function Cadastro() {
     // Imagem. Ver...
     const [image, setImage] = useState<File | null>(null)
     const [preview, setPreview] = useState<string | null | any>()
+
 
 
 
@@ -165,9 +165,14 @@ function Cadastro() {
                     data: formDataPet
                 })
                     .then(() => {
-                        setNome('')
-                        setIdade('')
                         setPreview('')
+                        setSexoDoAnimal('')
+                        setNome('')
+                        setClearTipo(clearTipo + 1)
+                        setClearRaca(clearRaca + 1)
+                        setClearPorte(clearPorte + 1)
+                        setIdade('')
+                        setActive(true)
                     })
 
             } else {
@@ -180,14 +185,22 @@ function Cadastro() {
                     data: formDataPet
                 })
                     .then(() => {
-                        setNome('')
-                        setTipo('')
                         setPreview('')
+                        setSexoDoAnimal('')
+                        setNome('')
+                        setClearTipo(clearTipo + 1)
+                        setClearRaca(clearRaca + 1)
+                        setClearPorte(clearPorte + 1)
+                        setIdade('')
+                        setActive(true)
+                    })
+                    .catch(function(error) {
+                        setActiveError(true)
+                        setErrorMessage(error)
                     })
             }
-            setActive(true)
         }
-        
+
     }
 
 
@@ -203,7 +216,7 @@ function Cadastro() {
             <label htmlFor="file-upload" className="inputDeImagem">
                 <div>
                     {preview ? (<img className="imagePreview" src={preview} />)
-                             : (<img className="imagePreview" src={doguito} />)}
+                        : (<img className="imagePreview" src={doguito} />)}
                 </div>
 
                 <div>
@@ -231,7 +244,7 @@ function Cadastro() {
                     aria-labelledby="femeaOuMacho"
                     name="femeaOuMacho"
                     value={sexoDoAnimal}
-                    onChange={handleRadioChange}>
+                    onChange={(event) => setSexoDoAnimal((event.target as HTMLInputElement).value)}>
 
                     <FormControlLabel
                         value={"Fêmea"}
@@ -269,9 +282,9 @@ function Cadastro() {
 
 
 
-
             <Autocomplete
-                onChange={(event, value) => setTipo(value)} 
+                key={clearTipo}
+                onChange={(event, value) => setTipo(value)}
                 disablePortal
                 id="tiposAutoComplete"
                 options={tiposAutoComplete}
@@ -291,6 +304,7 @@ function Cadastro() {
 
 
             <Autocomplete
+                key={clearRaca}
                 onChange={(event, value) => setRaca(value)}
                 disablePortal
                 id="racaAutoComplete"
@@ -309,6 +323,7 @@ function Cadastro() {
 
 
             <Autocomplete
+                key={clearPorte}
                 onChange={(event, value) => setPorte(value)}
                 disablePortal
                 id="porteAutoComplete"
@@ -345,7 +360,7 @@ function Cadastro() {
                 className='alert'
                 open={active}
                 autoHideDuration={6000}
-                onClose={handleClose}
+                onClose={() => setActive(false)}
                 sx={{
                     width: {
                         xs: 360,
@@ -361,13 +376,21 @@ function Cadastro() {
                     horizontal: "center"
                 }} >
 
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%', textAlign: "center" }}>
+                <Alert onClose={() => setActive(false)} severity="success" sx={{ width: '100%', textAlign: "center" }}>
                     Pet cadastrado com sucesso!
                 </Alert>
 
             </Snackbar>
-        </Box>
 
+            <Alerts 
+                active={activeError}
+                setActive={setActiveError}
+                severity={'error'}
+                message={`${errorMessage}`}
+            
+            />
+
+        </Box>
 
     );
 }
