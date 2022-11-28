@@ -6,6 +6,7 @@ import birdo from "../../assets/birdo.jpeg"
 import rato from "../../assets/rato.jpg"
 import { Carousel } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom'
 
 
 function CarouselComp() {
@@ -14,43 +15,50 @@ function CarouselComp() {
         <div className='carouselWrapper'>
             <Carousel>
                 <Carousel.Item>
-                    <img
-                        className="carouselImage"
-                        src={dog}
-                        alt="Cachorro"
-                    />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
+                    <Link to='/colecao'>
+                        <img
+                            className="carouselImage"
+                            src={dog}
+                            alt="Cachorro"
+                        />
+
+                        <Carousel.Caption className='carouselCaption'>
+                            <h3 className='carouselText'>Pet Nation</h3>
+                            <p className='carouselText'>O repositório mais fofo da internet ^^.</p>
+                        </Carousel.Caption>
+                    </Link>
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <img
-                        className="carouselImage"
-                        src={cat}
-                        alt="Rato"
-                    />
+                    <Link to='/cadastro'>
+                        <img
+                            className="carouselImage"
+                            src={cat}
+                            alt="Gato"
+                        />
 
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
+                        <Carousel.Caption className='carouselCaption'>
+                            <h3 className='carouselText'>Cadastre seu pet</h3>
+                            <p className='carouselText'>Seu pet e mostre para seus amigos...</p>
+                        </Carousel.Caption>
+                    </Link>
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <img
-                        className="carouselImage"
-                        src={lizardo}
-                        alt="Lagarto"
-                    />
+                    <Link to='/contato'>
+                        <img
+                            className="carouselImage"
+                            src={lizardo}
+                            alt="Lagarto"
+                        />
 
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                        </p>
-                    </Carousel.Caption>
+                        <Carousel.Caption className='carouselCaption'>
+                            <h3 className='carouselText'>Sobre o projeto</h3>
+                            <p className='carouselText'>
+                                Conheça mais sobre o projeto.
+                            </p>
+                        </Carousel.Caption>
+                    </Link>
                 </Carousel.Item>
 
                 <Carousel.Item>
@@ -59,9 +67,9 @@ function CarouselComp() {
                         src={birdo}
                         alt="Gato"
                     />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <Carousel.Caption className='carouselCaption'>
+                        <h3 className='carouselText'>First slide label</h3>
+                        <p className='carouselText'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
 
@@ -71,9 +79,9 @@ function CarouselComp() {
                         src={rato}
                         alt="Passaro"
                     />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <Carousel.Caption className='carouselCaption'>
+                        <h3 className='carouselText'>First slide label</h3>
+                        <p className='carouselText'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

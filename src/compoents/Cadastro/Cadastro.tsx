@@ -38,11 +38,8 @@ function Cadastro() {
     const [errorNome, setErrorNome] = useState({ nome: { valido: true, texto: '' } })
 
     const [tipo, setTipo] = useState<any | null>('')
-    const [clearTipo, setClearTipo] = useState<number>(1165516)
     const [raca, setRaca] = useState<any | null>('')
-    const [clearRaca, setClearRaca] = useState<number>(3041856018)
     const [porte, setPorte] = useState<any | null>('')
-    const [clearPorte, setClearPorte] = useState<number>(10566515)
     const [idade, setIdade] = useState<string>('')
 
 
@@ -51,21 +48,25 @@ function Cadastro() {
     const [portes, setPortes] = useState<string[]>([])
 
     // Imagem. Ver...
-    const [image, setImage] = useState<File | null>(null)
+    const [image, setImage] = useState<File | null | string>(null)
     const [preview, setPreview] = useState<string | null | any>()
 
 
 
 
     useEffect(() => {
-        if (image) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreview(reader.result as string);
+        if (typeof image !== 'string') {
+            if (image) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setPreview(reader.result as string);
+                }
+                reader.readAsDataURL(image);
+            } else {
+                setPreview(null);
             }
-            reader.readAsDataURL(image);
         } else {
-            setPreview(null);
+            setPreview(image)
         }
     }, [image])
 
@@ -75,28 +76,38 @@ function Cadastro() {
         axios.get<ITipo[]>(`http://localhost:8080/api/v1/tipo`)
             .then(resposta => setTipos(resposta.data))
 
-        axios.get<IRaca[]>(`http://localhost:8080/api/v1/raca`)
-            .then(resposta => setRacas(resposta.data))
-
-
-
         setPortes(["Pequeno", "Médio", "Grande"])
 
     }, [])
+
+    useEffect(() => {
+        axios.get<IRaca[]>(`http://localhost:8080/api/v1/raca`)
+            .then(resposta => setRacas(resposta.data.filter(value => tipo == value.tipo.nome)))
+    }, [tipo])
+
+    // Map para o autocomplete de tipo e raca
+    const tiposAutoComplete: string[] = tipos.map(tiposMapped => {
+        return tiposMapped.nome
+    })
+
+    const racasAutoComplete: string[] = racas.map(racasMapped => {
+        return racasMapped.nome
+    })
 
 
     useEffect(() => {
         if (parametros.id) {
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
+                .then(resposta => setImage(resposta.data.imageSource))
+
+            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setSexoDoAnimal(resposta.data.sexo))
 
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setNome(resposta.data.nome))
-            console.log(nome)
 
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setTipo(resposta.data.tipo.nome))
-            console.log(tipo)
 
             axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
                 .then(resposta => setRaca(resposta.data.raca.nome))
@@ -109,19 +120,6 @@ function Cadastro() {
         }
 
     }, [parametros])
-
-
-
-
-    // Map para o autocomplete de tipo e raca
-    const tiposAutoComplete: string[] = tipos.map(tiposMapped => {
-        return tiposMapped.nome
-    })
-
-    const racasAutoComplete: string[] = racas.map(racasMapped => {
-        return racasMapped.nome
-    })
-
 
 
     function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
@@ -168,9 +166,9 @@ function Cadastro() {
                         setPreview('')
                         setSexoDoAnimal('')
                         setNome('')
-                        setClearTipo(clearTipo + 1)
-                        setClearRaca(clearRaca + 1)
-                        setClearPorte(clearPorte + 1)
+                        setTipo('')
+                        setRaca('')
+                        setPorte('')
                         setIdade('')
                         setActive(true)
                     })
@@ -188,13 +186,13 @@ function Cadastro() {
                         setPreview('')
                         setSexoDoAnimal('')
                         setNome('')
-                        setClearTipo(clearTipo + 1)
-                        setClearRaca(clearRaca + 1)
-                        setClearPorte(clearPorte + 1)
+                        setTipo('')
+                        setRaca('')
+                        setPorte('')
                         setIdade('')
                         setActive(true)
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         setActiveError(true)
                         setErrorMessage(error)
                     })
@@ -283,18 +281,19 @@ function Cadastro() {
 
 
             <Autocomplete
-                key={clearTipo}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+                value={tipo}
                 onChange={(event, value) => setTipo(value)}
+                inputValue={tipo}
+                onInputChange={(event, newInputValue) => {
+                    setTipo(newInputValue);
+                }}
                 disablePortal
                 id="tiposAutoComplete"
                 options={tiposAutoComplete}
                 sx={{ width: 280, marginTop: 1 }}
                 renderInput={(params) => <TextField
-                    onChange={(event) => {
-                        setTipo(event.target.value);
-                    }}
                     {...params}
-                    value={tipo}
                     id="especieField"
                     label="Tipos"
                     variant="standard"
@@ -304,8 +303,13 @@ function Cadastro() {
 
 
             <Autocomplete
-                key={clearRaca}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
                 onChange={(event, value) => setRaca(value)}
+                value={raca}
+                inputValue={raca}
+                onInputChange={(event, newInputValue) => {
+                    setRaca(newInputValue);
+                }}
                 disablePortal
                 id="racaAutoComplete"
                 options={racasAutoComplete}
@@ -323,8 +327,13 @@ function Cadastro() {
 
 
             <Autocomplete
-                key={clearPorte}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
                 onChange={(event, value) => setPorte(value)}
+                value={porte}
+                inputValue={porte}
+                onInputChange={(event, newInputValue) => {
+                    setPorte(newInputValue);
+                }}
                 disablePortal
                 id="porteAutoComplete"
                 options={portes}
@@ -382,12 +391,12 @@ function Cadastro() {
 
             </Snackbar>
 
-            <Alerts 
+            <Alerts
                 active={activeError}
                 setActive={setActiveError}
                 severity={'error'}
                 message={`${errorMessage}`}
-            
+
             />
 
         </Box>

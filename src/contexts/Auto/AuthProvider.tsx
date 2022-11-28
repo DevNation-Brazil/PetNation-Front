@@ -14,13 +14,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem("nomeUser");
-        const loggedInEmail = localStorage.getItem("emailUser");
         const loggedInToken = localStorage.getItem("token");
         const loggedInTipo = localStorage.getItem("tipo");
         const loggedInUserId = localStorage.getItem("userId");
         if (loggedInUser) {
             setUser(loggedInUser);
-            setEmail(loggedInEmail)
             setUserToken(loggedInToken)
             setTipoToken(loggedInTipo)
             setUserId(loggedInUserId)

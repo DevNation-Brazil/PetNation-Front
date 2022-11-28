@@ -17,16 +17,17 @@ function Header() {
 
             <div className="divTroll"></div>
 
-            <img className="logo" src={logo} alt="Logo PetNation" />
+            <Link to='/'>
+                <img className="logo" src={logo} alt="Logo PetNation" />
+            </Link>
 
-            
-            {auth.user ? <AvatarMenu nomeDaClasse="loginHeaderAvatar"/> : <button className="loginHeader">
-                                        <Link to='/login'>
-                                            <span>Fazer login</span> <AiOutlineUser className='icon' />
-                                        </Link>
-                                        </button>
+            {auth.user ? <AvatarMenu nomeDaClasse="loginHeaderAvatar" /> : <button className="loginHeader">
+                <Link to='/login'>
+                    <span>Fazer login</span> <AiOutlineUser className='icon' />
+                </Link>
+            </button>
             }
-            
+
         </div>
     );
 }

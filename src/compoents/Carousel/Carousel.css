@@ -4,12 +4,23 @@
    
 }
 
-
 .carouselImage {
     width: 100%;
     height: 500px;
     object-fit: cover;
     object-position: center;
+}
+
+.carouselCaption {
+   
+    border-radius: 10px;
+}
+
+.carouselText {
+    font-family: 'Roboto', sans-serif;
+    background-color:  rgba(0,0,0,.5);
+    margin: 0;
+    /*color: #10162f;*/
 }
 
 @media (max-width:900px) {

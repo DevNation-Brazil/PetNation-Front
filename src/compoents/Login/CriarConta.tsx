@@ -3,11 +3,16 @@ import axios from "axios";
 import { ChangeEvent, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
-import {validacaoNome, validacaoEmail, validacaoPassword} from "../../models/validacoes";
+import { validacaoNome, validacaoEmail, validacaoPassword } from "../../models/validacoes";
+import Alerts from "../Alerts/Alerts";
 import "./LoginCriarConta.css"
 
 
 function CriarConta() {
+    const [activeError, setActiveError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
+
     const auth = useContext(AuthContext)
     const navigate = useNavigate();
 
@@ -26,17 +31,22 @@ function CriarConta() {
         evento.preventDefault()
         if (errorNome.nome.valido && errorEmail.email.valido && errorPassword.password.valido) {
             axios.post('http://localhost:8080/user', {
-            nome: nome,
-            email: email,
-            password: password,
-        })
-            
-            .then(() => {
-                navigate('/login')
+                nome: nome,
+                email: email,
+                password: password,
             })
-            alert('Faça o login e cadastre seu pet.')
+
+                .then(() => {
+                    navigate('/login')
+                    alert('Faça o login e cadastre seu pet.')
+                })
+                .catch(function (error) {
+                    setActiveError(true)
+                    setErrorMessage(error)
+                })
+
         }
-        
+
     }
 
 
@@ -147,6 +157,14 @@ function CriarConta() {
                         Faça login.
                     </Link>
                 </span>
+
+                <Alerts
+                    active={activeError}
+                    setActive={setActiveError}
+                    severity={'error'}
+                    message={`${errorMessage}`}
+
+                />
 
             </Box>
         </div>

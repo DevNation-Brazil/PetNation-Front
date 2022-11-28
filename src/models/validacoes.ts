@@ -1,7 +1,7 @@
 export function validacaoNome(nome: string) {
     var regexp = /^[^0-9]+$/;    
-    if (nome.length >= 10 || !nome.match(regexp)) {
-        return { valido: false, texto: 'Nome deve conter até 10 caracteres sem números.' }
+    if (nome.length >= 16 || !nome.match(regexp)) {
+        return { valido: false, texto: 'Nome deve conter até 15 caracteres sem números.' }
     } else {
         return { valido: true, texto: '' }
     }

@@ -23,11 +23,6 @@ function UserPage() {
 
     const [pets, setPets] = useState<IAnimal[]>([])
 
-    const handleSignout = async () => {
-        await auth.signout();
-        window.location.href = window.location.href;
-    }
-
     useEffect(() => {
         axios.get<IAnimal[]>(`http://localhost:8080/api/v1/pet/`)
             .then(resposta => setPets(resposta.data.filter(value => auth.userId == value.userId)))

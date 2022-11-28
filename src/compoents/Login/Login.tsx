@@ -19,14 +19,14 @@ function Login() {
     const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     }
-    
+
     const handleLogin = async (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
 
-        if(email && password) {
+        if (email && password) {
             const isLogged = await auth.signin(email, password);
             console.log(isLogged)
-            if(isLogged) {
+            if (isLogged) {
                 // window.location.href = "http://localhost:3000"
                 navigate('/cadastro')
             } else {
@@ -42,11 +42,15 @@ function Login() {
     return (
         <div className="loginWrapper">
 
-            <Box component="form" className="loginBox" onSubmit={handleLogin} sx={{ width: {xs: 300,
-                                                                    sm: 300,
-                                                                    md: 320,
-                                                                    lg: 480,
-                                                                    xl: 500,} }}>
+            <Box component="form" className="loginBox" onSubmit={handleLogin} sx={{
+                width: {
+                    xs: 300,
+                    sm: 300,
+                    md: 320,
+                    lg: 480,
+                    xl: 500,
+                }
+            }}>
 
                 <h3 className="loginTitle">Faça o login para cadastrar seu pet.</h3>
 
@@ -57,11 +61,15 @@ function Login() {
                     label="Digite seu e-mail"
                     variant="standard"
                     required
-                    sx={{ width: {xs: 250,
-                                 sm: 270,
-                                 md: 320,
-                                 lg: 380,
-                                 xl: 400,}, marginTop: 1 }} />
+                    sx={{
+                        width: {
+                            xs: 250,
+                            sm: 270,
+                            md: 320,
+                            lg: 380,
+                            xl: 400,
+                        }, marginTop: 1
+                    }} />
 
                 <TextField
                     onChange={handlePasswordInput}
@@ -71,19 +79,23 @@ function Login() {
                     type="password"
                     variant="standard"
                     required
-                    sx={{ width: {xs: 250,
-                        sm: 270,
-                        md: 320,
-                        lg: 380,
-                        xl: 400,}, marginTop: 3 }}
+                    sx={{
+                        width: {
+                            xs: 250,
+                            sm: 270,
+                            md: 320,
+                            lg: 380,
+                            xl: 400,
+                        }, marginTop: 3
+                    }}
                 />
 
 
-                <button className="botaoEntrar" 
-                        type="submit" >
+                <button className="botaoEntrar"
+                    type="submit" >
                     Entrar</button>
 
-                <span className="novoPorAqui">Novo por aqui? 
+                <span className="novoPorAqui">Novo por aqui?
                     <Link to='/criarconta'>
                         Crie sua conta.
                     </Link>
