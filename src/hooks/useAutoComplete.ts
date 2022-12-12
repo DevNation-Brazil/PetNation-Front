@@ -15,7 +15,7 @@ const API_kEY = process.env.REACT_APP_API_KEY
 export const useAutoComplete = ({ setTipos, setPortes, setRacas, tipo }: AutoCompletePorops) => {
     useEffect(() => {
         axios.request<ITipo[]>({
-            url: `${process.env.REACT_APP_API}/api/v1/tipo`,
+            url: `${process.env.REACT_APP_API}/api/v1/key/tipo`,
             method: 'GET',
             headers: {
                 'apikey': `${API_kEY}`
@@ -27,7 +27,7 @@ export const useAutoComplete = ({ setTipos, setPortes, setRacas, tipo }: AutoCom
     }, [])
 
     useEffect(() => {
-        axios.request<IRaca[]>({url: `${process.env.REACT_APP_API}/api/v1/raca`,
+        axios.request<IRaca[]>({url: `${process.env.REACT_APP_API}/api/v1/key/raca`,
         method: 'GET',
         headers: {
             'apikey': `${API_kEY}`
