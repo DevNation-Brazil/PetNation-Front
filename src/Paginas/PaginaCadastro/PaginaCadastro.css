@@ -1,0 +1,43 @@
+.paginaCadastroWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.mainContainerPaginaCadastro {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 95%;
+    justify-content: center;
+    gap: 10em;
+}
+@media (max-width:900px) {
+    .mainContainerPaginaCadastro {
+        width: 80%;
+    }
+}
+
+@media (max-width:600px) {
+
+    .mainContainerPaginaCadastro {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        width: 90%;
+    }
+}
+
+@media (max-width:500px) {
+
+    .mainContainerPaginaCadastro {
+        margin-left: 1.6em;
+    }
+}
+
+@media (max-width:400px) {
+
+    .mainContainerPaginaCadastro {
+        margin-left: 1.6em;
+    }
+}

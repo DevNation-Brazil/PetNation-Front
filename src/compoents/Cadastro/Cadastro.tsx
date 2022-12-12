@@ -2,19 +2,21 @@ import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Rad
 import { Box } from "@mui/system";
 import { AiOutlineSend } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import doguito from "../../assets/doguito.svg"
 import "./Cadastro.css"
 import { ITipo } from "../../Interfaces/tipo";
-import axios from "axios";
 import { IRaca } from "../../Interfaces/raca";
 import TituloPadras from "../TituloPadras/TituloPadras";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
 import { useParams } from "react-router-dom";
-import { IAnimal } from "../../Interfaces/IAnimal";
 import { validacaoNome } from "../../models/validacoes";
 import Alerts from "../Alerts/Alerts";
+import { useImagePreview } from "../../hooks/useImagePreview";
+import { useAutoComplete } from "../../hooks/useAutoComplete";
+import { useEditPetFill } from "../../hooks/useEditPetFill";
+import { aoEnviarFunc } from "../../models/aoEnviarFunc";
 
 
 
@@ -47,43 +49,12 @@ function Cadastro() {
     const [racas, setRacas] = useState<IRaca[]>([])
     const [portes, setPortes] = useState<string[]>([])
 
-    // Imagem. Ver...
     const [image, setImage] = useState<File | null | string>(null)
     const [preview, setPreview] = useState<string | null | any>()
 
-
-
-
-    useEffect(() => {
-        if (typeof image !== 'string') {
-            if (image) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setPreview(reader.result as string);
-                }
-                reader.readAsDataURL(image);
-            } else {
-                setPreview(null);
-            }
-        } else {
-            setPreview(image)
-        }
-    }, [image])
-
     //Get auto complete de tipo e raca
 
-    useEffect(() => {
-        axios.get<ITipo[]>(`http://localhost:8080/api/v1/tipo`)
-            .then(resposta => setTipos(resposta.data))
-
-        setPortes(["Pequeno", "Médio", "Grande"])
-
-    }, [])
-
-    useEffect(() => {
-        axios.get<IRaca[]>(`http://localhost:8080/api/v1/raca`)
-            .then(resposta => setRacas(resposta.data.filter(value => tipo == value.tipo.nome)))
-    }, [tipo])
+    useAutoComplete({ setTipos, setPortes, setRacas, tipo })
 
     // Map para o autocomplete de tipo e raca
     const tiposAutoComplete: string[] = tipos.map(tiposMapped => {
@@ -94,113 +65,21 @@ function Cadastro() {
         return racasMapped.nome
     })
 
+    useImagePreview({ image, setPreview })
 
-    useEffect(() => {
-        if (parametros.id) {
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setImage(resposta.data.imageSource))
-
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setSexoDoAnimal(resposta.data.sexo))
-
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setNome(resposta.data.nome))
-
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setTipo(resposta.data.tipo.nome))
-
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setRaca(resposta.data.raca.nome))
-
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setPorte(resposta.data.porte))
-
-            axios.get<IAnimal>(`http://localhost:8080/api/v1/pet/${parametros.id}/`)
-                .then(resposta => setIdade(resposta.data.idade))
-        }
-
-    }, [parametros])
+    useEditPetFill({ parametros, setImage, setSexoDoAnimal, setNome, setTipo, setRaca, setPorte, setIdade })
 
 
     function aoEnviar(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault()
-        const petObject = {
-            sexo: sexoDoAnimal,
-            nome: nome,
-            tipo: {
-                nome: tipo
-            },
-            raca: {
-                nome: raca
-            },
-            porte: porte,
-            idade: idade,
-            userId: auth.userId,
-            userName: auth.user
-        }
-
-        const json = JSON.stringify(petObject);
-        const blob = new Blob([json], {
-            type: 'application/json'
-        });
-
-        const formDataPet: any = new FormData();
-        formDataPet.append("DTO", blob)
-
-        if (image) {
-            formDataPet.append("file", image)
-        }
-
-        if (errorNome.nome.valido) {
-            if (parametros.id) {
-
-                axios.request({
-                    url: `http://localhost:8080/api/v1/pet/${parametros.id}/`,
-                    method: 'PATCH',
-                    headers: {
-                        'Authorization': `${tipoToken} ${token}`
-                    },
-                    data: formDataPet
-                })
-                    .then(() => {
-                        setPreview('')
-                        setSexoDoAnimal('')
-                        setNome('')
-                        setTipo('')
-                        setRaca('')
-                        setPorte('')
-                        setIdade('')
-                        setActive(true)
-                    })
-
-            } else {
-                axios.request({
-                    url: 'http://localhost:8080/api/v1/pet',
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `${tipoToken} ${token}`
-                    },
-                    data: formDataPet
-                })
-                    .then(() => {
-                        setPreview('')
-                        setSexoDoAnimal('')
-                        setNome('')
-                        setTipo('')
-                        setRaca('')
-                        setPorte('')
-                        setIdade('')
-                        setActive(true)
-                    })
-                    .catch(function (error) {
-                        setActiveError(true)
-                        setErrorMessage(error)
-                    })
-            }
-        }
-
+        
+        aoEnviarFunc ({ sexoDoAnimal, nome, tipo, raca, 
+            porte, idade, auth, image, errorNome, 
+            parametros, tipoToken, token,
+            setPreview, setSexoDoAnimal, setNome, 
+            setTipo, setRaca, setPorte, setIdade, 
+            setActive, setActiveError, setErrorMessage })
     }
-
 
 
     return (
@@ -297,7 +176,7 @@ function Cadastro() {
                     id="especieField"
                     label="Tipos"
                     variant="standard"
-                    required />}
+                     />}
             />
 
 
@@ -321,7 +200,7 @@ function Cadastro() {
                     value={raca}
                     label="Raça"
                     variant="standard"
-                    required />}
+                     />}
             />
 
 

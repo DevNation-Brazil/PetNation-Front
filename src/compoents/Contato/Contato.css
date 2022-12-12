@@ -9,8 +9,15 @@
 
 .contatoWrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2em;
+}
+
+.devWrapper{
+    display: flex;
+    flex-direction: row;
     gap: 2em;
 }
 

@@ -1,0 +1,220 @@
+:root {
+    --bakcELetra: #10162f;
+    --subColorLetras: #636363;
+}
+
+.exemploWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5em;
+}
+
+
+
+.exemploText {
+    font-family: 'Roboto', sans-serif;
+    color: #10162f;
+    font-size: 1.4rem;
+    text-align: justify;
+}
+
+.exemploWrapperCardsArea {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin-top: 1em;
+}
+
+.exemploCardOne {
+    display: flex;
+
+}
+
+.exemploTextCardOne {
+    font-family: 'Roboto', sans-serif;
+    color: #10162f;
+    font-size: 1.4rem;
+    width: 10em;
+    padding-top: 4.5em;
+    padding-left: 1em;
+    text-align: justify;
+}
+
+.exemploCardTwo {
+    display: flex;
+}
+
+.exemploTextCardTwo {
+    font-family: 'Roboto', sans-serif;
+    color: #10162f;
+    font-size: 1.4rem;
+    width: 13em;
+    padding-top: 2em;
+    padding-right: 1em;
+    text-align: justify;
+}
+
+.exemploTextCardTwoCelphone {
+    display: none;
+}
+
+.cardWrapperExemplo {
+    font-family: 'Roboto', sans-serif;
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+.carddExemplo {
+
+    background-color: #F7F9FB;
+    box-shadow: -3px 4px 3px var(--bakcELetra);
+    border-radius: 0.5em;
+    width: 28rem;
+    height: 192px;
+    display: flex;
+    transition-duration: 0.5s;
+}
+
+.carddExemplo:hover {
+    transform: translate(+12px, -6px);
+    border: none;
+}
+
+.backCardExemplo {
+    background-color: var(--bakcELetra);
+    border-radius: 0.5em;
+    width: 28rem;
+    height: 192px;
+
+}
+
+.cardImageDoguitoExemplo {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    width: 100%;
+    height: 11rem;
+    object-fit: fill;
+}
+
+.cardImageExemplo {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+
+
+.cardImageWrapperExemplo {
+    width: 14rem;
+    height: 11rem;
+}
+
+.cardBodyExemplo {
+    margin: 1rem;
+    flex-grow: 1;
+}
+
+.cardTitleExemplo {
+    color: var(--bakcELetra);
+    line-height: 1.4rem;
+    font-size: 1.4em;
+    margin-bottom: 0.2em;
+}
+
+.cardSubtitleExemplo {
+    font-size: 0.8em;
+    color: var(--subColorLetras);
+    margin-bottom: 0.6em;
+}
+
+.cardTextExemplo {
+    font-size: 1em;
+    color: var(--subColorLetras);
+    padding: 1px;
+    line-height: 0.5rem;
+}
+
+
+@media (max-width:900px) {
+
+    .exemploWrapper {
+        padding-left: 0;
+    }
+
+    .exemploText {
+        padding: 1em 1em 0 1em;
+    }
+
+    .exemploCardOne {
+        flex-direction: column;
+    }
+
+    .exemploTextCardOne {
+        font-size: 1.4rem;
+        width: 13em;
+        padding-top: 9em;
+        padding-left: 1em;
+        text-align: justify;
+    }
+
+    .exemploCardTwo {
+        flex-direction: column;
+    }
+
+    .exemploTextCardTwo {
+        display: none;
+    }
+
+    .exemploTextCardTwoCelphone {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        color: #10162f;
+        font-size: 1.4rem;
+        width: 13em;
+        padding-top: 9em;
+        padding-right: 0;
+        padding-left: 1em;
+        text-align: justify;
+    }
+
+    .AnimalCardWrapperExemplo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carddExemplo {
+        flex-direction: column;
+        width: 14rem;
+        height: 385px;
+        background: white;
+    }
+
+    .backCardExemplo {
+        width: 14rem;
+        margin-left: 3em
+    }
+
+    .cardImageExemplo {
+        border-top-right-radius: 0.5em;
+        border-bottom-left-radius: 0;
+        width: 100%;
+        height: 12rem;
+        object-fit: cover;
+    }
+
+    .cardTitleExemplo {
+
+        margin-top: 0.6em;
+    }
+
+    .cardSubtitleExemplo {
+
+        margin-top: 0.6em;
+    }
+}

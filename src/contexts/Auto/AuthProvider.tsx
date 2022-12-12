@@ -27,20 +27,25 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     }, []);
 
-    const signin = async (email: string, password: string) => {
-        var hours = 1; // to clear the localStorage after 1 hour
-            // (if someone want to clear after 8hrs simply change hours=8)
-            var now: any = new Date().getTime();
-            var setupTime: any = localStorage.getItem('setupTime');
-            if (setupTime == null) {
-                localStorage.setItem('setupTime', now)
-            } else {
-                if (now - setupTime > hours * 60 * 60 * 1000) {
-                    localStorage.clear()
-                    localStorage.setItem('setupTime', now);
-                }
+    
+
+    useEffect(() => {
+        var hours = 24; // to clear the localStorage after 1 hour
+        // (if someone want to clear after 8hrs simply change hours=8)
+        var now: any = new Date().getTime();
+        let setupTime: any = localStorage.getItem('setupTime');
+        if (setupTime == null) {
+            localStorage.setItem('setupTime', now)
+        } else {
+            if (now - setupTime > hours * 60 * 60 * 1000) {
+                localStorage.clear();
+                window.location.reload();
+                localStorage.setItem('setupTime', now);
             }
-            
+        }
+    }, [])
+
+    const signin = async (email: string, password: string) => {
         try {
             const data = await api.signin(email, password)
             if (data.user) {
@@ -49,7 +54,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
                 setTipoToken(data.user.tipo)
                 setUserId(data.user.userId)
                 setToken(data.user.nomeUser,
-                    data.user.emailUser,
                     data.user.token,
                     data.user.tipo,
                     data.user.userId)
@@ -69,9 +73,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     }
 
-    const setToken = (nomeUser: string, emailUser: string, token: string, tipo: string, userId: string) => {
+    const setToken = (nomeUser: string, token: string, tipo: string, userId: string) => {
         localStorage.setItem('nomeUser', nomeUser)
-        localStorage.setItem('emailUser', emailUser)
         localStorage.setItem('token', token)
         localStorage.setItem('tipo', tipo)
         localStorage.setItem('userId', userId)

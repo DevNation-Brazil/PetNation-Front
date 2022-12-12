@@ -1,10 +1,10 @@
 import "./AnimalCard.css"
 import doguito from "../../assets/doguito.svg"
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { IAnimal } from "../../Interfaces/IAnimal";
 import TituloPadras from "../TituloPadras/TituloPadras";
 import Alerts from "../Alerts/Alerts";
+import { useRegisteredPets } from "../../hooks/useRegisteredPets";
 
 
 
@@ -15,19 +15,7 @@ function AnimalCards() {
 
     const [pets, setPets] = useState<IAnimal[]>([])
 
-
-
-    useEffect(() => {
-        axios.get<IAnimal[]>(`http://localhost:8080/api/v1/pet`)
-            .then(resposta => setPets(resposta.data))
-
-            .catch(function (error) {
-                setActiveError(true)
-                setErrorMessage(error)
-            })
-
-    }, [])
-
+    useRegisteredPets({ setPets, setActiveError, setErrorMessage })
 
     return (
         <div className="colecaoWrapper">

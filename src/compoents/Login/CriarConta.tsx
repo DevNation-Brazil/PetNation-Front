@@ -1,11 +1,13 @@
 import { Box, TextField } from "@mui/material";
 import axios from "axios";
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/Auto/AuthContext";
 import { validacaoNome, validacaoEmail, validacaoPassword } from "../../models/validacoes";
 import Alerts from "../Alerts/Alerts";
 import "./LoginCriarConta.css"
+
+const API_kEY = process.env.REACT_APP_API_KEY
 
 
 function CriarConta() {
@@ -26,14 +28,21 @@ function CriarConta() {
 
 
 
-
     const handleCriaConta = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
         if (errorNome.nome.valido && errorEmail.email.valido && errorPassword.password.valido) {
-            axios.post('http://localhost:8080/user', {
-                nome: nome,
-                email: email,
-                password: password,
+            axios.request({
+                url: `${process.env.REACT_APP_API}/api/v1/key/user`,
+                method: 'POST',
+                headers: {
+                    'apikey': `${API_kEY}`
+                }
+                ,
+                data: {
+                    nome: nome,
+                    email: email,
+                    password: password
+                }
             })
 
                 .then(() => {
@@ -42,7 +51,7 @@ function CriarConta() {
                 })
                 .catch(function (error) {
                     setActiveError(true)
-                    setErrorMessage(error)
+                    setErrorMessage(error.response.status)
                 })
 
         }

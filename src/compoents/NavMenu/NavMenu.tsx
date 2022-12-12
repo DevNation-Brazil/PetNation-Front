@@ -46,7 +46,7 @@ const NavMenu = () => {
                     <li>
                         
                         <Link to='/colecao'><IoImagesOutline className='icon' />
-                        <span>Coleção</span>
+                        <span>Galeria de Pets</span>
                        </Link>
                     </li>
 

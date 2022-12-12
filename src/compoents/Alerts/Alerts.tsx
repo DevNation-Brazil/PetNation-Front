@@ -2,7 +2,7 @@ import { Alert, Snackbar } from "@mui/material";
 
 interface AlertProps {
     active: boolean
-    setActive: any
+    setActive: Function
     severity: any
     message: string
 }
@@ -31,7 +31,7 @@ function Alerts(props: AlertProps) {
                 }}>
 
                 <Alert onClose={() => props.setActive(false)} severity={props.severity} sx={{ width: '100%', textAlign: "center" }}>
-                    Ocorreu um erro inimaginável! Entre em contato no e-mail devnationbr@outlook.com e envie a seguinte mensagem de erro: {props.message}
+                    Ocorreu um erro inimaginável! Entre em contato no e-mail devnationbr@outlook.com e envie o seguinte código: {props.message}
                 </Alert>
 
             </Snackbar>

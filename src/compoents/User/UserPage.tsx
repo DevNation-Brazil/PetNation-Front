@@ -10,10 +10,12 @@ import "./UserPage.css"
 import { Link } from "react-router-dom";
 import Alerts from "../Alerts/Alerts";
 
+const API_kEY = process.env.REACT_APP_API_KEY
+
 function UserPage() {
-     // referente ao alert de erro 
-     const [activeError, setActiveError] = useState(false)
-     const [errorMessage, setErrorMessage] = useState('')
+    // referente ao alert de erro 
+    const [activeError, setActiveError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
 
     const auth = useContext(AuthContext);
@@ -24,12 +26,18 @@ function UserPage() {
     const [pets, setPets] = useState<IAnimal[]>([])
 
     useEffect(() => {
-        axios.get<IAnimal[]>(`http://localhost:8080/api/v1/pet/`)
+        axios.request<IAnimal[]>({
+            url: `${process.env.REACT_APP_API}/api/v1/key/pet`,
+            method: 'GET',
+            headers: {
+                'apikey': `${API_kEY}`
+            }
+        })
             .then(resposta => setPets(resposta.data.filter(value => auth.userId == value.userId)))
 
             .catch(function (error) {
                 setActiveError(true)
-                setErrorMessage(error)
+                setErrorMessage(error.response.status)
             })
 
     }, [])
@@ -38,7 +46,7 @@ function UserPage() {
         const conf = window.confirm('Tem certeza que deseja excluir seu pet?')
 
         if (conf === true) {
-            axios.delete(`http://localhost:8080/api/v1/pet/${petAhSerExcluido.id}/`,
+            axios.delete(`${process.env.REACT_APP_API}/api/v1/pet/${petAhSerExcluido.id}/`,
                 {
                     headers: {
                         'Authorization': `${tipoToken} ${token}`
@@ -56,7 +64,7 @@ function UserPage() {
             <div className="userPageWrapper">
 
                 <TituloPadras texto={`Olá ${auth.user}`} />
-                
+
             </div>
 
             <div className="colecaoWrapper">
