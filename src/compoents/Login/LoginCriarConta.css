@@ -5,7 +5,8 @@
     text-align: center;
     background-color: #F7F9FB;
     border-radius: 0.5em;
-    height: 300px;
+    width: 500px;
+    height: 350px;
     box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -16,6 +17,7 @@
     text-align: center;
     background-color: #F7F9FB;
     border-radius: 0.5em;
+    width: 500px;
     height: 450px;
     box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
 }
@@ -75,11 +77,21 @@
     color: #be3ead;
 }
 
+@media (max-width:1200px) {
+    .botaoEntrar {
+        width: 300px;
+    }
+
+    .criarContaWrapper {
+        width: 450px;
+    }
+}
+
 
 @media (max-width:900px) {
 
     .loginWrapper {
-        width: 300px;
+        width: 400px;
     }
 
     .criarContaWrapper {
@@ -96,4 +108,11 @@
         width: 250px;
     }
 
+}
+
+
+@media (max-width:500px) {
+    .loginWrapper {
+        width: 300px;
+    }
 }

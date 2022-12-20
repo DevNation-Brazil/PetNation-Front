@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 80%;
+    width: 600px;
     justify-content: center;
     margin-top: 2em;
 }
@@ -42,6 +42,12 @@
 
 }
 
+@media (max-width:1400px) {
+
+    .newcomersMain {
+        width: 500px;
+    }
+}
 
 @media (max-width:900px) {
 

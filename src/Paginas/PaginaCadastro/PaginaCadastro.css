@@ -12,9 +12,17 @@
     justify-content: center;
     gap: 10em;
 }
+
+@media (max-width:1380px) {
+
+    .mainContainerPaginaCadastro {
+       gap: 3em;
+    }
+}
+
 @media (max-width:900px) {
     .mainContainerPaginaCadastro {
-        width: 80%;
+        width: 90%;
     }
 }
 

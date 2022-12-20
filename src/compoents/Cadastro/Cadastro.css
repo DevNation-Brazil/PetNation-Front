@@ -81,9 +81,16 @@ input[type="file"] {
     display: flex;
 }
 
+@media (max-width:1400px) {
+
+    .cadastroWrapper {
+        margin-left: 1em;
+    }
+}
+
 @media (max-width:900px) {
 
     .cadastroWrapper {
-        margin-left: 2em;
+        margin-left: 0;
     }
 }

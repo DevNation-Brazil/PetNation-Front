@@ -2,7 +2,7 @@ import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Rad
 import { Box } from "@mui/system";
 import { AiOutlineSend } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import doguito from "../../assets/doguito.svg"
 import "./Cadastro.css"
 import { ITipo } from "../../Interfaces/tipo";
@@ -21,6 +21,11 @@ import { aoEnviarFunc } from "../../models/aoEnviarFunc";
 
 
 function Cadastro() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
     const parametros = useParams()
     const auth = useContext(AuthContext);
     //console.log(`nome: ${auth.user}/ token: ${auth.userToken}/ tipo token: ${auth.tipoToken}` )

@@ -39,6 +39,14 @@
     margin-top: 10em;
 }
 
+@media (max-width:1200px) {
+    .carouselCard {
+        align-items: center;
+        flex-direction: column;
+        margin: 10px;
+    }
+}
+
 @media (max-width:900px) {
     .landingContentSecundario {
         flex-direction: column;

@@ -23,6 +23,13 @@
     /*color: #10162f;*/
 }
 
+@media (max-width:1200px) {
+    .carouselWrapper {
+        width: 90%;
+        margin: 1em 0 0 0;
+    }
+}
+
 @media (max-width:900px) {
 
     .carouselWrapper {

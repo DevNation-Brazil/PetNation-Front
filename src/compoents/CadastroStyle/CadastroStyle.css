@@ -151,7 +151,7 @@
     }
 
     .exemploCardOne {
-        flex-direction: column;
+      margin-bottom: 5em;
     }
 
     .exemploTextCardOne {
@@ -163,23 +163,7 @@
     }
 
     .exemploCardTwo {
-        flex-direction: column;
-    }
-
-    .exemploTextCardTwo {
-        display: none;
-    }
-
-    .exemploTextCardTwoCelphone {
-        display: block;
-        font-family: 'Roboto', sans-serif;
-        color: #10162f;
-        font-size: 1.4rem;
-        width: 13em;
-        padding-top: 9em;
-        padding-right: 0;
-        padding-left: 1em;
-        text-align: justify;
+        margin-left: 2em; 
     }
 
     .AnimalCardWrapperExemplo {
@@ -216,5 +200,41 @@
     .cardSubtitleExemplo {
 
         margin-top: 0.6em;
+    }
+}
+
+@media (max-width:730px) {
+    .exemploCardOne {
+        margin-right: 1em;
+      }
+}
+
+@media (max-width:650px) {
+    .exemploCardOne {
+        margin-right: 0;
+        flex-direction: column;
+        align-items: center;
+      } 
+
+    .exemploCardTwo {
+        margin-left: 0;
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .exemploTextCardTwo {
+        display: none;
+    }
+
+    .exemploTextCardTwoCelphone {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        color: #10162f;
+        font-size: 1.4rem;
+        width: 13em;
+        padding-top: 9em;
+        padding-right: 0;
+        padding-left: 1em;
+        text-align: justify;
     }
 }
