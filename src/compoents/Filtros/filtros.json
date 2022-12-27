@@ -1,0 +1,18 @@
+[
+    {
+      "label": "cachorro",
+      "id": 1
+    },
+    {
+      "label": "gato",
+      "id": 2
+    },
+    {
+      "label": "réptil",
+      "id": 3
+    },
+    {
+      "label": "ave",
+      "id": 4
+    }
+  ]

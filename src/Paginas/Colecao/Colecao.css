@@ -1,0 +1,26 @@
+.sortingAreaWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2em;
+}
+
+
+.sortingArea {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 95%;
+    text-align: center;
+    gap: 2em;
+}
+
+.ordenadorArea {
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:900px) {
+    .sortingArea {
+        width: 90%;
+    }
+}

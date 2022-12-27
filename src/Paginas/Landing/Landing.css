@@ -10,7 +10,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2em;
     width: 95%;
 }
 
@@ -18,7 +17,6 @@
     display: flex;
     justify-content: space-around;
     gap: 2em;
-    /*background-color: #F7F9FB;*/
     margin-left: 2em;
     margin-right: 2em;
     border-radius: 10px;
@@ -29,7 +27,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    ;
 }
 
 .landingContentSecundario {

@@ -36,9 +36,17 @@
     color: #10162f;
     font-size: 1.4rem;
     width: 10em;
-    padding-top: 4.5em;
+    padding-top: 1em;
     padding-left: 1em;
     text-align: justify;
+}
+
+.exemploTextTwo {
+    font-family: 'Roboto', sans-serif;
+    color: #10162f;
+    font-size: 1.4rem;
+    text-align: justify;
+    margin-top: 2em;
 }
 
 .exemploCardTwo {
@@ -50,7 +58,7 @@
     color: #10162f;
     font-size: 1.4rem;
     width: 13em;
-    padding-top: 2em;
+    padding-top: 1em;
     padding-right: 1em;
     text-align: justify;
 }
@@ -61,7 +69,7 @@
 
 .cardWrapperExemplo {
     font-family: 'Roboto', sans-serif;
-    margin: 1rem;
+    margin: 1em;
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
@@ -158,8 +166,14 @@
         font-size: 1.4rem;
         width: 13em;
         padding-top: 9em;
-        padding-left: 1em;
+        padding-left: 0;
         text-align: justify;
+    }
+
+    .exemploTextTwo {
+        margin-top: 0;
+        margin-left: 1em;
+        margin-right: 1em;
     }
 
     .exemploCardTwo {
@@ -234,7 +248,7 @@
         width: 13em;
         padding-top: 9em;
         padding-right: 0;
-        padding-left: 1em;
+        padding-left: 0;
         text-align: justify;
     }
 }

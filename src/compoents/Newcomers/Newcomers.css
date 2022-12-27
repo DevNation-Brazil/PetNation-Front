@@ -1,15 +1,11 @@
 .newcomersWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 5em;
 }
 
 .newcomersMain {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     width: 600px;
     justify-content: center;
     margin-top: 2em;
@@ -19,9 +15,8 @@
     border-radius: 0.5em;
     font-family: 'Roboto', sans-serif;
     background-color: #F7F9FB;
-    width: 45em;
     margin-right: 4em;
-}
+} 
 
 
 
@@ -50,6 +45,10 @@
 }
 
 @media (max-width:900px) {
+
+    .newcomersWrapper {
+        align-items: center;
+    }
 
     .newcomersMain {
         display: flex;

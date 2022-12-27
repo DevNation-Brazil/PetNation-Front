@@ -1,0 +1,18 @@
+.botaoOrdenador {
+    margin-right: 1em;
+    background-color: #c4c0c0;
+    width: 105px;
+    height: 50px;
+    border: none;
+    box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+    color: #474950;
+}
+
+.botaoOrdenadorAtivo {
+    background-color: #6E85B7;
+    color: ivory;
+}

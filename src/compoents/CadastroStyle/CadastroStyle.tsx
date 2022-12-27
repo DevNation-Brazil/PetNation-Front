@@ -35,7 +35,7 @@ function CadastroStyle() {
                 </div>
 
 
-                <div className="exemploText">
+                <div className="exemploTextTwo">
                     Caso não selecione uma foto, o cadastro ficará com uma imagem genérica.
                 </div>
                 <div className="exemploCardTwo">
