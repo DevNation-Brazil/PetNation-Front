@@ -9,12 +9,13 @@ interface Props {
 function Buscador ({ busca, setBusca }: Props) {
     return (
         <div>
-            <TextField 
-                id="outlined-search" 
-                label="Search field" 
+            <TextField  
+                label="Nome do Pet" 
                 type="search" 
+                variant="standard"
                 value={busca}
-                onChange={(evento) => setBusca(evento.target.value)} />
+                onChange={(evento) => setBusca(evento.target.value)}
+                sx={{width: 300}} />
         </div>
     );
 }

@@ -14,23 +14,42 @@ function Colecao() {
     const [filtro, setFiltros] = useState<string>('')
     const [ordenador, setOrdenador] = useState('')
 
+
     return (
         <>
             <NavMenu />
             <Header />
-            
-            
-            <div className="sortingAreaWrapper">
-           
-                <div className="sortingArea">
-                <TituloPadras texto="Pets Cadastrados" />
-                
-                    <Buscador busca={busca} setBusca={setBusca} />
-                    <div>
-                        <Filtros filtro={filtro} setFiltro={setFiltros} />
+
+
+            <div className="topAreaWrapper">
+
+                <div className="topArea">
+                    <div className="colecaoTitle" >
+                        <TituloPadras texto="Pets Cadastrados" />
                     </div>
-                    <div className="ordenadorArea">
-                        <Ordenador ordenador={ordenador} setOrdenador={setOrdenador} />
+
+                    <div className="sortingArea" >
+
+                        <div className="buscadorOrdenadorArea" >
+                            <span className="textSortingArea" >
+                                Procure pelo nome do Pet
+                            </span>
+                            <Buscador busca={busca} setBusca={setBusca} />
+                        </div>
+
+                        <div className="filterArea">
+                            <span className="textSortingArea" >
+                                Filtre pelo tipo do Pet
+                            </span>
+                            <Filtros filtro={filtro} setFiltro={setFiltros} />
+                        </div>
+
+                        <div className="buscadorOrdenadorArea">
+                            <span className="textSortingArea" >
+                                Ordene por...
+                            </span>
+                            <Ordenador ordenador={ordenador} setOrdenador={setOrdenador} />
+                        </div>
                     </div>
                 </div>
             </div>

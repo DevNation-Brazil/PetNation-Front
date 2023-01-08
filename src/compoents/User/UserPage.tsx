@@ -9,6 +9,7 @@ import { BsTrash } from "react-icons/bs";
 import "./UserPage.css"
 import { Link } from "react-router-dom";
 import Alerts from "../Alerts/Alerts";
+import Card from "../Colecao/Card";
 
 const API_kEY = process.env.REACT_APP_API_KEY
 
@@ -75,35 +76,20 @@ function UserPage() {
 
 
                     {pets.map(petsMapped =>
-                        <div className="cardWrapperUser backCardUser" key={petsMapped.id}>
-                            <div className="carddUser">
-                                <div className="cardImageWrapperUser">
-                                    <img className={petsMapped.imageSource ? "cardImageUser" : "cardImageDoguito"} src={petsMapped.imageSource ?? doguito} />
-                                </div>
-                                <div className="cardBodyUser">
-                                    <h3 className="cardTitleUser" key={petsMapped.nome}>{petsMapped.nome}</h3>
-                                    <h4 className="cardSubtitleUser" key={petsMapped.sexo}>{petsMapped.sexo}</h4>
-                                    <p className="cardTextUser" key={petsMapped.tipo.nome}>Tipo: {petsMapped.tipo.nome}</p>
-                                    <p className="cardTextUser" key={petsMapped.raca.nome}>Raça: {petsMapped.raca.nome}</p>
-                                    <p className="cardTextUser" key={petsMapped.porte}>Tamanho: {petsMapped.porte}</p>
-                                    <div className="idadeEEdit">
-                                        <p className="cardTextUser" key={petsMapped.idade}>Idade: {petsMapped.idade} </p>
-
-                                        <div className="userIconsWrapper">
-                                            <Link to={`/cadastro/${petsMapped.id}`}>
-                                                <span className="iconEditAnimalCardUser">
-                                                    <AiOutlineEdit size={25} />
-                                                </span>
-                                            </Link>
-
-                                            <span className="iconTrashAnimalCardUser">
-                                                <BsTrash size={20} onClick={() => excluir(petsMapped)} />
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Card
+                            key={petsMapped.id}
+                            id={petsMapped.id}
+                            imageSource={petsMapped.imageSource}
+                            nome={petsMapped.nome}
+                            sexo={petsMapped.sexo}
+                            tipo={{ nome: petsMapped.tipo.nome }}
+                            raca={{ nome: petsMapped.raca.nome, tipo: { nome: petsMapped.raca.tipo.nome } }}
+                            porte={petsMapped.porte}
+                            idade={petsMapped.idade}
+                            userName={petsMapped.userName}
+                            inconEdit={<AiOutlineEdit size={25} />}
+                            inconTrash={<BsTrash size={20} onClick={() => excluir(petsMapped)} />}
+                        />
                     )}
 
                 </div>

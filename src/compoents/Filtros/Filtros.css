@@ -1,19 +1,27 @@
 .botaoFiltro {
     margin-right: 1em;
-    margin-top: 1em;
+    margin-bottom: 1em;
     background-color: #c4c0c0;
-    width: 105px;
-    height: 50px;
+    width: 80px;
+    height: 40px;
     border: none;
     box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-size: 1.3em;
+    font-size: 1em;
     color: #474950;
+}
+
+.botaoFiltro:hover {
+    background-color: #a8a6a6;
 }
 
 .botaoFiltroAtivo {
     background-color: #6E85B7;
     color: ivory;
+}
+
+.botaoFiltroAtivo:hover {
+    background-color: #5d74a5;
 }

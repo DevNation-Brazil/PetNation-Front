@@ -1,18 +1,26 @@
 [
     {
-      "label": "cachorro",
+      "label": "Cachorro",
       "id": 1
     },
     {
-      "label": "gato",
+      "label": "Gato",
       "id": 2
     },
     {
-      "label": "réptil",
+      "label": "Réptil",
       "id": 3
     },
     {
-      "label": "ave",
+      "label": "Ave",
       "id": 4
+    },
+    {
+      "label": "Roedor",
+      "id": 5
+    },
+    {
+      "label": "Outros",
+      "id": 6
     }
   ]

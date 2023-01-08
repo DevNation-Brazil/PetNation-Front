@@ -17,6 +17,7 @@ import { useImagePreview } from "../../hooks/useImagePreview";
 import { useAutoComplete } from "../../hooks/useAutoComplete";
 import { useEditPetFill } from "../../hooks/useEditPetFill";
 import { aoEnviarFunc } from "../../models/aoEnviarFunc";
+import Botao from "../Botao/Botao";
 
 
 
@@ -242,10 +243,13 @@ function Cadastro() {
                 type="number"
 
                 required
-                sx={{ width: 280, marginTop: 1 }} />
+                sx={{ width: 280, marginTop: 1, marginBottom: 3 }} />
 
-            <button className="botaoEnviar" type="submit" >
-                Enviar  <div className="iconeDoBotao"><AiOutlineSend size={20} /></div></button>
+            <Botao 
+                text="Enviar"
+                width="105px"
+                height="50px"
+                icon={<AiOutlineSend size={20} />} />
 
 
 

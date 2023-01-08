@@ -24,7 +24,7 @@ function CarouselComp() {
 
                         <Carousel.Caption className='carouselCaption'>
                             <h3 className='carouselText'>Pet Nation</h3>
-                            <p className='carouselText'>O repositório mais fofo da internet ^^.</p>
+                            <p className='carouselTextP'>O repositório mais fofo da internet ^^.</p>
                         </Carousel.Caption>
                     </Link>
                 </Carousel.Item>
@@ -39,7 +39,7 @@ function CarouselComp() {
 
                         <Carousel.Caption className='carouselCaption'>
                             <h3 className='carouselText'>Cadastre seu pet</h3>
-                            <p className='carouselText'>Seu pet e mostre para seus amigos...</p>
+                            <p className='carouselTextP'>Seu pet e mostre para seus amigos...</p>
                         </Carousel.Caption>
                     </Link>
                 </Carousel.Item>
@@ -54,7 +54,7 @@ function CarouselComp() {
 
                         <Carousel.Caption className='carouselCaption'>
                             <h3 className='carouselText'>Sobre o projeto</h3>
-                            <p className='carouselText'>
+                            <p className='carouselTextP'>
                                 Conheça mais sobre o projeto.
                             </p>
                         </Carousel.Caption>
@@ -69,7 +69,7 @@ function CarouselComp() {
                     />
                     <Carousel.Caption className='carouselCaption'>
                         <h3 className='carouselText'>First slide label</h3>
-                        <p className='carouselText'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <p className='carouselTextP'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
 
@@ -81,7 +81,7 @@ function CarouselComp() {
                     />
                     <Carousel.Caption className='carouselCaption'>
                         <h3 className='carouselText'>First slide label</h3>
-                        <p className='carouselText'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <p className='carouselTextP'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

@@ -96,29 +96,6 @@
     justify-content: space-between;
 }
 
-.userIconsWrapper {
-    display: flex;
-    gap: 0.5em;
-}
-
-
-.iconEditAnimalCardUser {
-    color: #6E85B7;
-}
-
-
-.iconEditAnimalCardUser:hover {
-    color: #10162f;
-}
-
-.iconTrashAnimalCardUser {
-    color: #7a0e0e
-}
-
-.iconTrashAnimalCardUser:hover {
-    color: #c51616;
-}
-
 
 @media (max-width:900px) {
 

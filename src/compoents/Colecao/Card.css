@@ -13,7 +13,7 @@
     box-shadow: -3px 4px 3px var(--bakcELetra);
     border-radius: 0.5em;
     min-width: 28rem;
-    height: 192px;
+    height: 220px;
     display: flex;
     transition-duration: 0.5s;
 }
@@ -33,15 +33,16 @@
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
     width: 100%;
-    height: 11rem;
-    object-fit: fill;
+    height: 120%;
+    object-fit:none;
+
 }
 
 .cardImage {
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
     width: 100%;
-    height: 12rem;
+    height: 13.8rem;
     object-fit: cover;
 }
 
@@ -77,12 +78,34 @@
     line-height: 0.5rem;
 }
 
+.userIconsWrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+}
+
+.iconEditAnimalCardUser {
+    color: #6E85B7;
+}
+
+.iconEditAnimalCardUser:hover {
+    color: #10162f;
+}
+
+.iconTrashAnimalCardUser {
+    color: #7a0e0e
+}
+
+.iconTrashAnimalCardUser:hover {
+    color: #c51616;
+}
+
 @media (max-width:900px) {
 
     .cardd {
         flex-direction: column;
         min-width: 14rem;
-        height: 385px;
+        height: 420px;
         background: white;
     }
 

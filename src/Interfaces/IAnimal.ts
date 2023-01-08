@@ -2,14 +2,14 @@ import { IRaca } from "./raca"
 import { ITipo } from "./tipo"
 
 export interface IAnimal {
-  id: string
+  id: string | undefined
+  imageSource: string | undefined
   nome: string
-  idade:string
   sexo: string
   porte: string
   raca: IRaca
   tipo: ITipo
-  userId: string
-  imageSource: string
+  userId: string | undefined
+  idade:string
   userName?: string
   }

@@ -4,18 +4,20 @@
 }
 
 
+.Wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
 .colecaoWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
+    width: 95%;
     align-items: center;
-
-}
-
-.titlePetCadastrados {
-    font-family: 'Roboto', sans-serif;
-    color: var(--bakcELetra);
-    font-size: 1.5rem;
+    gap: 2em;
 }
 
 .AnimalCardWrapper {

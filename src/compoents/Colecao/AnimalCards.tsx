@@ -19,9 +19,9 @@ function AnimalCards(props: Props) {
 
     const [pets, setPets] = useState<IAnimal[]>([])
     const [lista, setLista] = useState<IAnimal[] | undefined>([])
-    const [itensPerPage, setItensPerPage] = useState(9)
+    const [itensPerPage, setItensPerPage] = useState(12)
     const [currentPage, setCurrentPage] = useState(0)
-  
+
     const pages = Math.ceil(lista!.length / itensPerPage)
     const startIndex = currentPage * itensPerPage
     const endIndex = startIndex + itensPerPage
@@ -68,47 +68,40 @@ function AnimalCards(props: Props) {
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page - 1)
-      };
+    };
 
 
     return (
-        <div className="colecaoWrapper">
+        <div className="Wrapper">
 
-     
+            <div className="colecaoWrapper" >
 
-            <div className="AnimalCardWrapper">
+                <div className="AnimalCardWrapper">
 
 
-                {currentItens!.map(item => (
-                    <Card key={item.id} {...item} />
-                ))}
+                    {currentItens!.map(item => (
+                        <Card key={item.id} {...item} />
+                    ))}
+
+                </div>
+
+                <Pagination
+                    sx={{ marginTop: 2 }}
+                    count={pages}
+                    page={currentPage + 1}
+                    onChange={handlePageChange}
+                    variant="outlined"
+                    color="primary" />
+
+                <Alerts
+                    active={activeError}
+                    setActive={setActiveError}
+                    severity={'error'}
+                    message={`${errorMessage}`}
+
+                />
 
             </div>
-
-           {/* <div>
-                {Array.from(Array(pages), (item, index) => {
-                    return <button value={index}
-                                    onClick={(e: any) => setCurrentPage(Number(e.target.value))} >
-                                {index + 1}
-                           </button>
-                })}
-            </div> */}
-
-            <Pagination
-                sx={{marginTop: 2}} 
-                count={pages}
-                page={currentPage + 1}
-                onChange={handlePageChange}
-                variant="outlined" 
-                color="primary" />
-
-            <Alerts
-                active={activeError}
-                setActive={setActiveError}
-                severity={'error'}
-                message={`${errorMessage}`}
-
-            />
         </div>
     );
 }
